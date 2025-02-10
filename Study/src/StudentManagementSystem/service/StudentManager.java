@@ -5,7 +5,16 @@ import java.util.List;
 
 public class StudentManager {
     private static StudentManager instance;
-    public List<StudentDTO> students;
+
+    public List<StudentDTO> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentDTO> students) {
+        this.students = students;
+    }
+
+    private List<StudentDTO> students;
 
     public StudentManager() {
         students = new ArrayList<>();

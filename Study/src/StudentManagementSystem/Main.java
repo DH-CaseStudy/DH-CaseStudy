@@ -71,19 +71,19 @@ public class Main {
     private static void extracted(int average, String sno, String name, int korean, int english, int math, int science, int total) {
         if(average >= 90){
             String grade = "A";
-            StudentManager.getInstance().students.add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
+            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
         } else if(average < 90 && average >= 80){
             String grade = "B";
-            StudentManager.getInstance().students.add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
+            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
         } else if(average < 80 && average >= 70){
             String grade = "C";
-            StudentManager.getInstance().students.add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
+            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
         } else if(average < 70 && average >= 60){
             String grade = "D";
-            StudentManager.getInstance().students.add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
+            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
         } else {
             String grade = "F";
-            StudentManager.getInstance().students.add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
+            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
         }
     }
 }
