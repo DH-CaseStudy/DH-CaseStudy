@@ -6,7 +6,9 @@ import StudentManagementSystem.util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDBIO implements StudentIO {
@@ -43,8 +45,39 @@ public class StudentDBIO implements StudentIO {
     }
 
     @Override
-    public void loadStudentData(List<StudentDTO> students) {
+    public List<StudentDTO> loadStudentData() {
         //DB Read
+        List<StudentDTO> students = new ArrayList<>();
+        String sql = "SELECT sno, name, korean, english, math, science, total, average, grade FROM STUDENT";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+
+            // ✅ ResultSet에서 데이터를 읽어 StudentDTO 리스트로 변환
+            while (rs.next()) {
+                StudentDTO student = new StudentDTO(
+                        rs.getString("sno"),
+                        rs.getString("name"),
+                        rs.getInt("korean"),
+                        rs.getInt("english"),
+                        rs.getInt("math"),
+                        rs.getInt("science"),
+                        rs.getInt("total"),
+                        rs.getFloat("average"),
+                        rs.getString("grade")
+                );
+
+                students.add(student); // ✅ 리스트에 추가
+            }
+
+
+            System.out.println("✅ DB에서 학생 정보 로드 완료! 총 " + students.size() + "명");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
     }
 
     @Override

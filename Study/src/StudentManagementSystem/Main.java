@@ -17,7 +17,7 @@ public class Main {
         while (true) {
             try {
                 System.out.println("학생정보 조회 시스템 입니다.");
-                System.out.println("1.입력 2.조회 3.정렬(학번 순) 4.정렬(성적 순) 5.삭제 중 원하는 번호를 입력하세요.");
+                System.out.println("1.입력 2.전체조회 3.정렬(학번 순) 4.정렬(성적 순) 5.삭제 중 원하는 번호를 입력하세요.");
                 int selectNum = Integer.parseInt(br.readLine());
 
                 switch (selectNum) {
@@ -58,7 +58,8 @@ public class Main {
                     }
 
                     case 2 -> {
-                        System.out.println("조회");
+                        StudentManager.getInstance().loadStudentsFromDB();
+                        System.out.println("전체 조회");
                     }
                     case 3 -> {
                         System.out.println("정렬(학번 순)");
