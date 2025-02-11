@@ -11,7 +11,7 @@ public class Main {
 
         StudentFileIO studentFileIO = new StudentFileIO();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String regex = "^\\d{5}$"; // 정규식: 숫자 5자리
+        String regex = "^[0-9]{9,10}$"; // 정규식: 숫자 10자리
 
         while (true) {
             try {
@@ -22,7 +22,7 @@ public class Main {
                 switch (selectNum) {
                     case 1 -> {
                         System.out.println("입력을 선택하셨습니다.");
-                        System.out.println("학번을 입력해주세요(5자리 숫자만 입력 가능)");
+                        System.out.println("학번을 입력해주세요(10자리 숫자만 입력 가능)");
                         String sno = br.readLine();
 
                         if(!sno.matches(regex)){
