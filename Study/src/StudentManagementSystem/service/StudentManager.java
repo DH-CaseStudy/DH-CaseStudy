@@ -29,6 +29,7 @@ public class StudentManager {
         this.students = students;
     }
 
+
     public void sortBySnoFromDB(){
         students.clear();
         this.students = StudentDBIO.getInstance().sortBySno();
@@ -40,17 +41,20 @@ public class StudentManager {
     }
 
     public void searchStudentFromDB(String sno){
-         StudentDBIO.getInstance().search(sno);
+        StudentDBIO.getInstance().search(sno);
+        System.out.println(StudentDBIO.getInstance().search(sno));
     }
 
     public void loadStudentsFromDB() {
         students.clear();//갱신하기 위해 담겨있는 데이터를 비운다.
-        this.students = StudentDBIO.getInstance().loadStudentData(); // DBIO로 부터 조회를 요청하고 반환된 리스트를 직접 저장
+        // DBIO로 부터 조회를 요청하고 반환된 리스트를 직접 저장
+        System.out.println(StudentDBIO.getInstance().loadStudentData());
 
     }
 
     public void saveStudentFromDB(StudentDTO studentDTO){
         StudentDBIO.getInstance().saveStudentData(studentDTO);
+        System.out.println(StudentDBIO.getInstance().saveStudentData(studentDTO));
     }
 
 }

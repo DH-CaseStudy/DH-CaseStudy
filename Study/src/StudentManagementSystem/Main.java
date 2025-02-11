@@ -65,8 +65,6 @@ public class Main {
                         System.out.println("학번을 입력하세요.");
                         String sno = br.readLine();
                         StudentManager.getInstance().searchStudentFromDB(sno);
-
-                        System.out.println(StudentManager.getInstance().getStudent());
                     }
                     case 4 -> {
                         StudentManager.getInstance().sortBySnoFromDB();
