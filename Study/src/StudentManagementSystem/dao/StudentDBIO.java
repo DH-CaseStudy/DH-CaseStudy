@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDBIO implements StudentIO {
-    //입력과 출력을 담당하여 File Write
+    //입력과 출력을 담당하여 File Write 이었으나 DB로 전환~
     public StudentDBIO() {
     }
 
@@ -116,14 +116,70 @@ public class StudentDBIO implements StudentIO {
     }
 
     @Override
-    public void sort(float average) {
-        //성적순 정렬
+    public List<StudentDTO> sortBySno() {
+        //학번 순 정렬
+        List<StudentDTO> students = new ArrayList<>();
+        String sql = "SELECT * FROM STUDENT ORDER BY sno DESC";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                students.add(new StudentDTO(
+                        rs.getString("sno"),
+                        rs.getString("name"),
+                        rs.getInt("korean"),
+                        rs.getInt("english"),
+                        rs.getInt("math"),
+                        rs.getInt("science"),
+                        rs.getInt("total"),
+                        rs.getFloat("average"),
+                        rs.getString("grade")
+                ));
+            }
+
+            System.out.println("✅ 학번 순 정렬 완료!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return students;
     }
 
     @Override
-    public void sort(String sno) {
-        //학번 순 정렬
+    public List<StudentDTO> sortByTotal() {
+        //성적 순 정렬
+        List<StudentDTO> students = new ArrayList<>();
+        String sql = "SELECT * FROM STUDENT ORDER BY total DESC"; // ✅ 총점 내림차순 정렬
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                students.add(new StudentDTO(
+                        rs.getString("sno"),
+                        rs.getString("name"),
+                        rs.getInt("korean"),
+                        rs.getInt("english"),
+                        rs.getInt("math"),
+                        rs.getInt("science"),
+                        rs.getInt("total"),
+                        rs.getFloat("average"),
+                        rs.getString("grade")
+                ));
+            }
+
+            System.out.println("✅ 성적 순 정렬 완료!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return students;
     }
+
+
+
 
     @Override
     public void input(StudentDTO studentDTO) {
