@@ -6,14 +6,6 @@ import java.util.List;
 public class StudentManager {
     private static StudentManager instance;
 
-    public List<StudentDTO> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<StudentDTO> students) {
-        this.students = students;
-    }
-
     private List<StudentDTO> students;
 
     public StudentManager() {
@@ -26,5 +18,13 @@ public class StudentManager {
         }
 
         return instance;
+    }
+
+    public List<StudentDTO> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentDTO> students) {
+        this.students = students;
     }
 }
