@@ -8,7 +8,6 @@ public class StudentManager {
     private static StudentManager instance;
 
     private List<StudentDTO> students;
-    private StudentDTO student;
 
     public StudentManager() {
         students = new ArrayList<>();
@@ -30,10 +29,6 @@ public class StudentManager {
         this.students = students;
     }
 
-    public StudentDTO getStudent() {
-        return student;
-    }
-
     public void sortBySnoFromDB(){
         students.clear();
         this.students = StudentDBIO.getInstance().sortBySno();
@@ -45,7 +40,7 @@ public class StudentManager {
     }
 
     public void searchStudentFromDB(String sno){
-        this.student = StudentDBIO.getInstance().search(sno);
+         StudentDBIO.getInstance().search(sno);
     }
 
     public void loadStudentsFromDB() {
@@ -55,7 +50,7 @@ public class StudentManager {
     }
 
     public void saveStudentFromDB(StudentDTO studentDTO){
-        this.student = StudentDBIO.getInstance().saveStudentData(studentDTO);
+        StudentDBIO.getInstance().saveStudentData(studentDTO);
     }
 
 }
