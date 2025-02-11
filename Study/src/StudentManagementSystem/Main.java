@@ -1,6 +1,6 @@
 package StudentManagementSystem;
 
-import StudentManagementSystem.dao.StudentFileIO;
+import StudentManagementSystem.dao.StudentDBIO;
 import StudentManagementSystem.dto.StudentDTO;
 import StudentManagementSystem.service.StudentManager;
 
@@ -9,7 +9,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        StudentFileIO studentFileIO = new StudentFileIO();
+        DBConnection.getConnection();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String regex = "^[0-9]{9,10}$"; // 정규식: 숫자 10자리
 
@@ -42,7 +42,7 @@ public class Main {
                         int total = korean + english + math + science;
                         int average = total/4;
 
-                        extracted(average, sno, name, korean, english, math, science, total);
+                        extracted(sno, name, korean, english, math, science, total, average);
 
                     }
 
@@ -68,7 +68,7 @@ public class Main {
         }
     }
 
-    private static void extracted(int average, String sno, String name, int korean, int english, int math, int science, int total) {
+    private static void extracted(String sno, String name, int korean, int english, int math, int science, int total, int average) {
         if(average >= 90){
             String grade = "A";
             StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));

@@ -3,11 +3,11 @@ import StudentManagementSystem.dto.StudentDTO;
 import StudentManagementSystem.io.StudentIO;
 import java.util.List;
 
-public class StudentFileIO implements StudentIO {
+public class StudentDBIO implements StudentIO {
 
     private static final String File = "studentsDB.txt";
     //입력과 출력을 담당하여 File Write
-    public StudentFileIO() {
+    public StudentDBIO() {
     }
 
     @Override
