@@ -94,4 +94,19 @@ public class StudentDTO {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "학생번호='" + sno + '\'' +
+                ", 이름='" + name + '\'' +
+                ", 국어점수=" + korean +
+                ", 영어점수=" + english +
+                ", 수학점수=" + math +
+                ", 과학점수=" + science +
+                ", 총합=" + total +
+                ", 평균=" + average +
+                ", 등급='" + grade + '\'' +
+                '}';
+    }
 }

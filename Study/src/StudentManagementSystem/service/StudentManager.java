@@ -34,6 +34,7 @@ public class StudentManager {
 
         StudentDBIO studentDBIO = new StudentDBIO();
         students = studentDBIO.loadStudentData(); // ✅ 반환된 리스트를 직접 저장
+
     }
 
 }

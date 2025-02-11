@@ -53,12 +53,16 @@ public class Main {
                         // ✅ StudentDTO 객체 생성 후 StudentManager에 추가
                         StudentDTO student = new StudentDTO(sno, name, korean, english, math, science, total, average, grade);
                         studentDBIO.saveStudentData(student);
-                        System.out.println(" 학생 정보가 메모리에 저장되었습니다.");
+                        System.out.println(" 학생 정보가 DB에 저장되었습니다.");
 
                     }
 
                     case 2 -> {
                         StudentManager.getInstance().loadStudentsFromDB();
+                        for(StudentDTO student : StudentManager.getInstance().getStudents()){
+                            System.out.println(student.toString());
+                        }
+
                         System.out.println("전체 조회");
                     }
                     case 3 -> {
