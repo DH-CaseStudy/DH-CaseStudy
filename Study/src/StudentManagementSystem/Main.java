@@ -27,7 +27,8 @@ public class Main {
                         String sno = br.readLine();
 
                         if(!sno.matches(regex)){
-                            System.out.println("5자리의 숫자로만 입력해주세요.");
+                            System.out.println("10자리의 숫자로만 입력해주세요.");
+                            break;
                         }
 
                         System.out.println("이름을 입력해 주세요.");
@@ -54,7 +55,6 @@ public class Main {
                         StudentDTO student = new StudentDTO(sno, name, korean, english, math, science, total, average, grade);
                         studentDBIO.saveStudentData(student);
                         System.out.println(" 학생 정보가 DB에 저장되었습니다.");
-
                     }
 
                     case 2 -> {
@@ -72,10 +72,12 @@ public class Main {
                         System.out.println(StudentManager.getInstance().getStudent());
                     }
                     case 4 -> {
-                        System.out.println("정렬(학번 순)");
+                        StudentManager.getInstance().sortBySnoFromDB();
+                        System.out.println(StudentManager.getInstance().getStudents());
                     }
                     case 5 -> {
-                        System.out.println("정렬(성적 순");
+                        StudentManager.getInstance().sortByTotalFromDB();
+                        System.out.println(StudentManager.getInstance().getStudents());
                     }
                     case 6 -> {
                         System.out.println("삭제");
@@ -89,15 +91,4 @@ public class Main {
             }
         }
     }
-
-//    private static StudentDTO createStudent(String sno, String name, int korean, int english, int math, int science, int total, int average) {
-//        String grade;
-//        if (average >= 90) grade = "A";
-//        else if (average >= 80) grade = "B";
-//        else if (average >= 70) grade = "C";
-//        else if (average >= 60) grade = "D";
-//        else grade = "F";
-//
-//        return new StudentDTO(sno, name, korean, english, math, science, total, average, grade);
-//    }
 }
