@@ -12,7 +12,6 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String regex = "^[0-9]{9,10}$"; // 정규식: 숫자 10자리
-        StudentDBIO studentDBIO = new StudentDBIO();
 
         while (true) {
             try {
@@ -50,10 +49,8 @@ public class Main {
                         else if (average >= 60) grade = "D";
                         else grade = "F";
 
-                        //extracted(sno, name, korean, english, math, science, total, average);
-                        // ✅ StudentDTO 객체 생성 후 StudentManager에 추가
                         StudentDTO student = new StudentDTO(sno, name, korean, english, math, science, total, average, grade);
-                        studentDBIO.saveStudentData(student);
+                        StudentManager.getInstance().saveStudentFromDB(student);
                         System.out.println(" 학생 정보가 DB에 저장되었습니다.");
                     }
 

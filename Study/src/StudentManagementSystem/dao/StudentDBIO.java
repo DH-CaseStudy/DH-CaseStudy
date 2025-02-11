@@ -12,12 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDBIO implements StudentIO {
-    //입력과 출력을 담당하여 File Write 이었으나 DB로 전환~
-    public StudentDBIO() {
+
+    //DAO의 역할을 하니까 객체가 전역에 단 하나만 존재하는 것이 맞지 않을까? => 싱글톤
+    private static StudentDBIO instance;
+
+    private StudentDBIO(){}
+
+    public static StudentDBIO getInstance() {
+        if (instance == null) {
+            instance = new StudentDBIO();
+        }
+        return instance;
     }
 
     @Override
-    public void saveStudentData(StudentDTO student) {
+    public StudentDTO saveStudentData(StudentDTO student) {
+        StudentDTO studentDTO = student;
         //DB Create
         String sql = "INSERT INTO STUDENT (sno, name, korean, english, math, science, total, average, grade) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -42,6 +52,8 @@ public class StudentDBIO implements StudentIO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return studentDTO;
     }
 
     @Override

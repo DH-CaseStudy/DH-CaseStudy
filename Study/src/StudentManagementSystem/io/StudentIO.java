@@ -5,6 +5,6 @@ import StudentManagementSystem.dto.StudentDTO;
 import java.util.List;
 
 public interface StudentIO extends StudentInput, SearchStudent, SortedStudent{
-    void saveStudentData(StudentDTO student);
+    StudentDTO saveStudentData(StudentDTO student);
     List<StudentDTO> loadStudentData();
 }

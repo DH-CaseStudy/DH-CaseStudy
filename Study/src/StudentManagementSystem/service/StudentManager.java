@@ -9,7 +9,6 @@ public class StudentManager {
 
     private List<StudentDTO> students;
     private StudentDTO student;
-    StudentDBIO studentDBIO = new StudentDBIO();
 
     public StudentManager() {
         students = new ArrayList<>();
@@ -37,22 +36,26 @@ public class StudentManager {
 
     public void sortBySnoFromDB(){
         students.clear();
-        this.students = studentDBIO.sortBySno();
+        this.students = StudentDBIO.getInstance().sortBySno();
     }
 
     public void sortByTotalFromDB(){
         students.clear();
-        this.students = studentDBIO.sortByTotal();
+        this.students = StudentDBIO.getInstance().sortByTotal();
     }
 
     public void searchStudentFromDB(String sno){
-        this.student = studentDBIO.search(sno);
+        this.student = StudentDBIO.getInstance().search(sno);
     }
 
     public void loadStudentsFromDB() {
         students.clear();//갱신하기 위해 담겨있는 데이터를 비운다.
-        this.students = studentDBIO.loadStudentData(); // DBIO로 부터 조회를 요청하고 반환된 리스트를 직접 저장
+        this.students = StudentDBIO.getInstance().loadStudentData(); // DBIO로 부터 조회를 요청하고 반환된 리스트를 직접 저장
 
+    }
+
+    public void saveStudentFromDB(StudentDTO studentDTO){
+        this.student = StudentDBIO.getInstance().saveStudentData(studentDTO);
     }
 
 }
