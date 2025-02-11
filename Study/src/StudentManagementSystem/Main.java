@@ -3,15 +3,16 @@ package StudentManagementSystem;
 import StudentManagementSystem.dao.StudentDBIO;
 import StudentManagementSystem.dto.StudentDTO;
 import StudentManagementSystem.service.StudentManager;
+import StudentManagementSystem.util.DBConnection;
 
 import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        DBConnection.getConnection();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String regex = "^[0-9]{9,10}$"; // 정규식: 숫자 10자리
+        StudentDBIO studentDBIO = new StudentDBIO();
 
         while (true) {
             try {
@@ -41,8 +42,18 @@ public class Main {
                         int science = Integer.parseInt(br.readLine());
                         int total = korean + english + math + science;
                         int average = total/4;
+                        String grade;
+                        if (average >= 90) grade = "A";
+                        else if (average >= 80) grade = "B";
+                        else if (average >= 70) grade = "C";
+                        else if (average >= 60) grade = "D";
+                        else grade = "F";
 
-                        extracted(sno, name, korean, english, math, science, total, average);
+                        //extracted(sno, name, korean, english, math, science, total, average);
+                        // ✅ StudentDTO 객체 생성 후 StudentManager에 추가
+                        StudentDTO student = new StudentDTO(sno, name, korean, english, math, science, total, average, grade);
+                        studentDBIO.saveStudentData(student);
+                        System.out.println(" 학생 정보가 메모리에 저장되었습니다.");
 
                     }
 
@@ -68,22 +79,14 @@ public class Main {
         }
     }
 
-    private static void extracted(String sno, String name, int korean, int english, int math, int science, int total, int average) {
-        if(average >= 90){
-            String grade = "A";
-            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
-        } else if(average < 90 && average >= 80){
-            String grade = "B";
-            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
-        } else if(average < 80 && average >= 70){
-            String grade = "C";
-            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
-        } else if(average < 70 && average >= 60){
-            String grade = "D";
-            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
-        } else {
-            String grade = "F";
-            StudentManager.getInstance().getStudents().add(new StudentDTO(sno, name, korean, english, math, science, total, average, grade));
-        }
-    }
+//    private static StudentDTO createStudent(String sno, String name, int korean, int english, int math, int science, int total, int average) {
+//        String grade;
+//        if (average >= 90) grade = "A";
+//        else if (average >= 80) grade = "B";
+//        else if (average >= 70) grade = "C";
+//        else if (average >= 60) grade = "D";
+//        else grade = "F";
+//
+//        return new StudentDTO(sno, name, korean, english, math, science, total, average, grade);
+//    }
 }
