@@ -107,6 +107,6 @@ public class StudentDTO {
                 ", 총합=" + total +
                 ", 평균=" + average +
                 ", 등급='" + grade + '\'' +
-                '}';
+                '}' + "\n";
     }
 }
