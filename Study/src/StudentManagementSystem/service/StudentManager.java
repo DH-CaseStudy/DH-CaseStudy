@@ -35,6 +35,16 @@ public class StudentManager {
         return student;
     }
 
+    public void sortBySnoFromDB(){
+        students.clear();
+        this.students = studentDBIO.sortBySno();
+    }
+
+    public void sortByTotalFromDB(){
+        students.clear();
+        this.students = studentDBIO.sortByTotal();
+    }
+
     public void searchStudentFromDB(String sno){
         this.student = studentDBIO.search(sno);
     }
