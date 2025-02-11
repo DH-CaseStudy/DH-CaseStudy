@@ -81,8 +81,38 @@ public class StudentDBIO implements StudentIO {
     }
 
     @Override
-    public void search(String sno) {
-        //학번으로 검색
+    public StudentDTO search(String sno) {
+        String sql = "SELECT sno, name, korean, english, math, science, total, average, grade FROM STUDENT WHERE sno = ?";
+        StudentDTO student = null;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, sno); // ✅ 학번 바인딩
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) { // ✅ 결과가 존재할 경우
+                student = new StudentDTO(
+                        rs.getString("sno"),
+                        rs.getString("name"),
+                        rs.getInt("korean"),
+                        rs.getInt("english"),
+                        rs.getInt("math"),
+                        rs.getInt("science"),
+                        rs.getInt("total"),
+                        rs.getFloat("average"),
+                        rs.getString("grade")
+                );
+
+                System.out.println("✅ 학생 정보 조회 성공: " + student);
+            } else {
+                System.out.println("❌ 해당 학번을 가진 학생이 없습니다.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return student; // ✅ StudentDTO 객체 반환 (없으면 null)
     }
 
     @Override

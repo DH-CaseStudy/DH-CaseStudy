@@ -8,6 +8,8 @@ public class StudentManager {
     private static StudentManager instance;
 
     private List<StudentDTO> students;
+    private StudentDTO student;
+    StudentDBIO studentDBIO = new StudentDBIO();
 
     public StudentManager() {
         students = new ArrayList<>();
@@ -29,11 +31,17 @@ public class StudentManager {
         this.students = students;
     }
 
-    public void loadStudentsFromDB() {
-        students.clear();//갱신의 개념으로
+    public StudentDTO getStudent() {
+        return student;
+    }
 
-        StudentDBIO studentDBIO = new StudentDBIO();
-        students = studentDBIO.loadStudentData(); // ✅ 반환된 리스트를 직접 저장
+    public void searchStudentFromDB(String sno){
+        this.student = studentDBIO.search(sno);
+    }
+
+    public void loadStudentsFromDB() {
+        students.clear();//갱신하기 위해 담겨있는 데이터를 비운다.
+        this.students = studentDBIO.loadStudentData(); // DBIO로 부터 조회를 요청하고 반환된 리스트를 직접 저장
 
     }
 

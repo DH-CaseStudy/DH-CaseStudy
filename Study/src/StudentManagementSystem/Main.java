@@ -17,7 +17,7 @@ public class Main {
         while (true) {
             try {
                 System.out.println("학생정보 조회 시스템 입니다.");
-                System.out.println("1.입력 2.전체조회 3.정렬(학번 순) 4.정렬(성적 순) 5.삭제 중 원하는 번호를 입력하세요.");
+                System.out.println("1.입력 2.전체조회 3.학번으로 조회 4.정렬(학번 순) 5.정렬(성적 순) 6.삭제 중 원하는 번호를 입력하세요.");
                 int selectNum = Integer.parseInt(br.readLine());
 
                 switch (selectNum) {
@@ -59,19 +59,25 @@ public class Main {
 
                     case 2 -> {
                         StudentManager.getInstance().loadStudentsFromDB();
+
                         for(StudentDTO student : StudentManager.getInstance().getStudents()){
                             System.out.println(student.toString());
                         }
-
-                        System.out.println("전체 조회");
                     }
                     case 3 -> {
-                        System.out.println("정렬(학번 순)");
+                        System.out.println("학번을 입력하세요.");
+                        String sno = br.readLine();
+                        StudentManager.getInstance().searchStudentFromDB(sno);
+
+                        System.out.println(StudentManager.getInstance().getStudent());
                     }
                     case 4 -> {
-                        System.out.println("정렬(성적 순");
+                        System.out.println("정렬(학번 순)");
                     }
                     case 5 -> {
+                        System.out.println("정렬(성적 순");
+                    }
+                    case 6 -> {
                         System.out.println("삭제");
                     }
                     default -> {
