@@ -1,10 +1,12 @@
 package StudentManagementSystem.service;
 import StudentManagementSystem.dao.StudentDBIO;
 import StudentManagementSystem.dto.StudentDTO;
+import StudentManagementSystem.io.StudentIO;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentManager {
+public class StudentManager extends StudentDBIO {
     private static StudentManager instance;
 
     private List<StudentDTO> students;
@@ -51,12 +53,12 @@ public class StudentManager {
     public void loadStudentsFromDB() {
         students.clear();//갱신하기 위해 담겨있는 데이터를 비운다.
         // DBIO로 부터 조회를 요청하고 반환된 리스트를 직접 저장
-        studentDBIO.loadStudentData();
+        studentDBIO.output();
 
     }
 
     public void saveStudentFromDB(StudentDTO studentDTO){
-        studentDBIO.saveStudentData(studentDTO);
+        studentDBIO.input(studentDTO);
     }
 
 }

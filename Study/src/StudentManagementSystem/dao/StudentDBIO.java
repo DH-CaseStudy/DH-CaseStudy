@@ -17,7 +17,7 @@ public class StudentDBIO implements StudentIO {
     public StudentDBIO(){}
 
     @Override
-    public StudentDTO saveStudentData(StudentDTO student) {
+    public StudentDTO input(StudentDTO student) {
         StudentDTO studentDTO = student;
         //DB Create
         String sql = "INSERT INTO STUDENT (sno, name, korean, english, math, science, total, average, grade) " +
@@ -48,7 +48,7 @@ public class StudentDBIO implements StudentIO {
     }
 
     @Override
-    public List<StudentDTO> loadStudentData() {
+    public List<StudentDTO> output() {
         //DB Read
         List<StudentDTO> students = new ArrayList<>();
         String sql = "SELECT sno, name, korean, english, math, science, total, average, grade FROM STUDENT";
@@ -179,18 +179,5 @@ public class StudentDBIO implements StudentIO {
         }
 
         return students;
-    }
-
-
-
-
-    @Override
-    public void input(StudentDTO studentDTO) {
-        //File write...
-    }
-
-    @Override
-    public void output(StudentDTO studentDTO) {
-        // 단순 출력..
     }
 }
