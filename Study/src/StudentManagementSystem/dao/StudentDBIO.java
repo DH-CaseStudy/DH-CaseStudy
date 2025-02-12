@@ -13,17 +13,8 @@ import java.util.List;
 
 public class StudentDBIO implements StudentIO {
 
-    //DAO의 역할을 하니까 객체가 전역에 단 하나만 존재하는 것이 맞지 않을까? => 싱글톤
-    private static StudentDBIO instance;
 
-    private StudentDBIO(){}
-
-    public static StudentDBIO getInstance() {
-        if (instance == null) {
-            instance = new StudentDBIO();
-        }
-        return instance;
-    }
+    public StudentDBIO(){}
 
     @Override
     public StudentDTO saveStudentData(StudentDTO student) {
