@@ -6,7 +6,7 @@ import StudentManagementSystem.io.StudentIO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentManager extends StudentDBIO {
+public class StudentManager {
     private static StudentManager instance;
 
     private List<StudentDTO> students;
@@ -14,7 +14,7 @@ public class StudentManager extends StudentDBIO {
     private final StudentDBIO studentDBIO;
 
     public StudentManager() {
-        studentDBIO = new StudentDBIO();
+        studentDBIO = new StudentDBIO(); //싱글톤이니까 단 하나의 객체.
         students = new ArrayList<>();
     }
 
@@ -34,14 +34,11 @@ public class StudentManager extends StudentDBIO {
         this.students = students;
     }
 
-
     public void sortBySnoFromDB(){
-        students.clear();
         studentDBIO.sortBySno();
     }
 
     public void sortByTotalFromDB(){
-        students.clear();
         studentDBIO.sortByTotal();
     }
 
@@ -51,10 +48,8 @@ public class StudentManager extends StudentDBIO {
     }
 
     public void loadStudentsFromDB() {
-        students.clear();//갱신하기 위해 담겨있는 데이터를 비운다.
-        // DBIO로 부터 조회를 요청하고 반환된 리스트를 직접 저장
-        studentDBIO.output();
-
+        this.students = studentDBIO.output();
+//        studentDBIO.output();
     }
 
     public void saveStudentFromDB(StudentDTO studentDTO){

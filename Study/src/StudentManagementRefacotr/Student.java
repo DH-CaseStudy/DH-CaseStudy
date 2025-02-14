@@ -1,6 +1,8 @@
-package StudentManagementSystem.dto;
+package StudentManagementRefacotr;
 
-public class StudentDTO {
+//롬복 전환.
+public class Student {
+    //DTO 클래스로 서 역할을 한다
     private String sno;
     private String name;
     private int korean;
@@ -11,7 +13,7 @@ public class StudentDTO {
     private float average;
     private String grade;
 
-    public StudentDTO(String sno, String name, int korean, int english, int math, int science, int total, float average, String grade) {
+    public Student(String sno, String name, int korean, int english, int math, int science, int total, float average, String grade) {
         this.sno = sno;
         this.name = name;
         this.korean = korean;
@@ -97,16 +99,16 @@ public class StudentDTO {
 
     @Override
     public String toString() {
-        return "{" +
-                "학생번호='" + sno + '\'' +
-                ", 이름='" + name + '\'' +
-                ", 국어점수=" + korean +
-                ", 영어점수=" + english +
-                ", 수학점수=" + math +
-                ", 과학점수=" + science +
-                ", 총합=" + total +
-                ", 평균=" + average +
-                ", 등급='" + grade + '\'' +
-                '}' + "\n";
+        return "Student{" +
+                "sno='" + sno + '\'' +
+                ", name='" + name + '\'' +
+                ", korean=" + korean +
+                ", english=" + english +
+                ", math=" + math +
+                ", science=" + science +
+                ", total=" + total +
+                ", average=" + average +
+                ", grade='" + grade + '\'' +
+                '}';
     }
 }

@@ -43,6 +43,7 @@ public class Main {
                         int total = korean + english + math + science;
                         int average = total/4;
                         String grade;
+
                         if (average >= 90) grade = "A";
                         else if (average >= 80) grade = "B";
                         else if (average >= 70) grade = "C";

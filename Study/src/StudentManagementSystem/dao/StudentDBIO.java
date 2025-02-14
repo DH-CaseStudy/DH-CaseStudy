@@ -38,13 +38,14 @@ public class StudentDBIO implements StudentIO {
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("✅ 학생 정보 저장 완료: " + student.getName());
+                System.out.println("학생 정보 저장 완료");
+                System.out.println(student);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return studentDTO;
+        return studentDTO;// 파일 덮어쓰기 Json
     }
 
     @Override
@@ -76,7 +77,8 @@ public class StudentDBIO implements StudentIO {
             }
 
 
-            System.out.println("✅ DB에서 학생 정보 로드 완료! 총 " + students.size() + "명");
+            System.out.println("DB에서 학생 정보 로드 완료!");
+            System.out.println(students);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,7 +109,8 @@ public class StudentDBIO implements StudentIO {
                         rs.getString("grade")
                 );
 
-                System.out.println("✅ 학생 정보 조회 성공: " + student);
+                System.out.println("학생 정보 조회 성공: ");
+                System.out.println(student);
             } else {
                 System.out.println("❌ 해당 학번을 가진 학생이 없습니다.");
             }
@@ -141,7 +144,8 @@ public class StudentDBIO implements StudentIO {
                 ));
             }
 
-            System.out.println("✅ 학번 순 정렬 완료!");
+            System.out.println("학번 순 정렬 완료!");
+            System.out.println(students);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -173,7 +177,8 @@ public class StudentDBIO implements StudentIO {
                 ));
             }
 
-            System.out.println("✅ 성적 순 정렬 완료!");
+            System.out.println("성적 순 정렬 완료!");
+            System.out.println(students);
         } catch (SQLException e) {
             e.printStackTrace();
         }
