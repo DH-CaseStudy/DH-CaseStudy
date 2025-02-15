@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentManager extends StudentDBIO{
+    private static final StudentManager INSTANCE = new StudentManager();
     private List<Student> studentList = new ArrayList<>();
 
     protected StudentManager() {
        super();
+    }
+
+    public static StudentManager getInstance() {
+        return INSTANCE;
     }
 
     public List<Student> getStudentList() {

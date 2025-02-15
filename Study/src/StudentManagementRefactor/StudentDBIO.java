@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     //파일의 입출력을 담당한다 이후에 DB에 접근하는 로직으로 변경.
 
-    private static final StudentDBIO INSTANCE = new StudentManager();
+    private static StudentDBIO instance;
     //왜 static final 로 선언했을까?
     //파일 입출력(혹은 DB)는 전역에 단일 객체로 접근하는것이 안전하다고 생각.
     //여러 객체가 생성되서 테이블의 무결성이 훼손되는 것을 방지한다.
@@ -27,7 +27,10 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     }
 
     public static StudentDBIO getInstance() {
-        return INSTANCE;
+        if (instance == null) {
+            instance = StudentManager.getInstance(); // 기본 인스턴스를 StudentManager로 설정
+        }
+        return instance;
     }
 
     public String getFilePath() {
@@ -36,8 +39,47 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
 
     @Override
     public void saveData(Object student) {
+        if (!(student instanceof Student)) {
+            System.out.println("⚠️ 잘못된 데이터 타입입니다.");
+            return;
+        }
 
+        Student newStudent = (Student) student;
+        File file = new File(filePath);
+
+        try {
+            // ✅ 기존 데이터 불러오기
+            String json = file.exists() ? new String(Files.readAllBytes(Paths.get(filePath))) : "{ \"students\": [] }";
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
+            JSONArray studentArray = (JSONArray) jsonObject.get("students");
+
+            // ✅ 새로운 학생 데이터 추가
+            JSONObject studentObj = new JSONObject();
+            studentObj.put("sno", newStudent.getSno());
+            studentObj.put("name", newStudent.getName());
+            studentObj.put("korean", newStudent.getKorean());
+            studentObj.put("english", newStudent.getEnglish());
+            studentObj.put("math", newStudent.getMath());
+            studentObj.put("science", newStudent.getScience());
+            studentObj.put("total", newStudent.getTotal());
+            studentObj.put("average", newStudent.getAverage());
+            studentObj.put("grade", newStudent.getGrade());
+
+            studentArray.add(studentObj);
+            jsonObject.put("students", studentArray);
+
+            // ✅ JSON 파일에 저장
+            try (FileWriter fileWriter = new FileWriter(filePath)) {
+                fileWriter.write(jsonObject.toJSONString());
+            }
+
+            System.out.println("✅ 학생 정보가 JSON 파일에 추가되었습니다!");
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     public void loadData() throws IOException {
@@ -54,9 +96,12 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
             if (json.trim().isEmpty() || json.equals("{ \"students\": [] }"))
             {
                 System.out.println("데이터가 비어있습니다.");
-                //StudentManager.getInstance().setStudentList(new ArrayList<>());
             } else{
                 List<Student> studentList = parseJson(json);
+                StudentManager.getInstance().setStudentList(studentList);
+                for (Student student : StudentManager.getInstance().getStudentList()) {
+                    System.out.println(student);
+                }
             }
 
         } catch (IOException e) {
