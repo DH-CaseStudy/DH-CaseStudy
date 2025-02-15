@@ -1,32 +1,38 @@
-package StudentManagementRefacotr;
+package StudentManagementRefactor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentManager extends StudentDBIO{
     private List<Student> studentList = new ArrayList<>();
+
+    protected StudentManager() {
+       super();
+    }
+
     //가공될 데이터를 정의
 
     @Override
-    public void search() {
-        super.search();
+    public void search(String sno) {
+        super.search(sno);
         //list
         //callback
     }
 
     @Override
-    public void sort(int total) {
-        super.sort(total);
+    public void sortByTotal() {
+        super.sortByTotal();
     }
 
     @Override
-    public void sort(String sno) {
-        super.sort(sno);
+    public void sortByName() {
+        super.sortByName();
     }
 
     @Override
     public void input() {
         super.input();
+        System.out.println("StudentManager input 이벤트!");
     }
 
     @Override

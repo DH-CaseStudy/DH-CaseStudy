@@ -1,8 +1,8 @@
-package StudentManagementRefacotr;
+package StudentManagementRefactor;
 
 public interface SortedStudent {
-    void sort(String sno);
-    void sort(int total);
+    void sortByName();
+    void sortByTotal();
     //정렬하는 기능
     //1. 학번으로 정렬
     //2. 성적으로 정렬

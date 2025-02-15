@@ -1,4 +1,4 @@
-package StudentManagementRefacotr;
+package StudentManagementRefactor;
 
 public interface StudentOutput {
     void output();
