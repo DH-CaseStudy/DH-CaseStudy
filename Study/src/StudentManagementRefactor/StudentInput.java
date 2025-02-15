@@ -1,5 +1,5 @@
 package StudentManagementRefactor;
 
 public interface StudentInput {
-    void input();
+    void input(Object obj);
 }

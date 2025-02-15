@@ -45,11 +45,17 @@ public class Main {
                     System.out.println(total);
                     System.out.println(average);
                     Student student = new Student(sno, name, korean, english, math, science, total, average, grade);
-                    StudentDBIO.getInstance().saveData(student); // json 파일에 데이터 입력 발생
+                    StudentDBIO.getInstance().input(student); // json 파일에 데이터 입력 발생
+                    break;
 
-                    return;
-                case 2 : break;
-                case 3 : break;
+                case 2 :
+                    StudentDBIO.getInstance().loadData();
+                    StudentManager.getInstance().output();
+                    break;
+                case 3 :
+                    System.out.println("학번을 입력하세요.");
+                    String search = Utility.readInput(String.class);
+
                 case 4 : break;
                 case 5 : break;
                 case 6 : break;

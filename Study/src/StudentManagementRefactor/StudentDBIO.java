@@ -37,52 +37,11 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
         return filePath;
     }
 
-    @Override
-    public void saveData(Object student) {
-        if (!(student instanceof Student)) {
-            System.out.println("⚠️ 잘못된 데이터 타입입니다.");
-            return;
-        }
-
-        Student newStudent = (Student) student;
-        File file = new File(filePath);
-
-        try {
-            // ✅ 기존 데이터 불러오기
-            String json = file.exists() ? new String(Files.readAllBytes(Paths.get(filePath))) : "{ \"students\": [] }";
-            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
-            JSONArray studentArray = (JSONArray) jsonObject.get("students");
-
-            // ✅ 새로운 학생 데이터 추가
-            JSONObject studentObj = new JSONObject();
-            studentObj.put("sno", newStudent.getSno());
-            studentObj.put("name", newStudent.getName());
-            studentObj.put("korean", newStudent.getKorean());
-            studentObj.put("english", newStudent.getEnglish());
-            studentObj.put("math", newStudent.getMath());
-            studentObj.put("science", newStudent.getScience());
-            studentObj.put("total", newStudent.getTotal());
-            studentObj.put("average", newStudent.getAverage());
-            studentObj.put("grade", newStudent.getGrade());
-
-            studentArray.add(studentObj);
-            jsonObject.put("students", studentArray);
-
-            // ✅ JSON 파일에 저장
-            try (FileWriter fileWriter = new FileWriter(filePath)) {
-                fileWriter.write(jsonObject.toJSONString());
-            }
-
-            System.out.println("✅ 학생 정보가 JSON 파일에 추가되었습니다!");
-
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @Override
     public void loadData() throws IOException {
+        //json 파일에 있는 모든 학생들의 정보를 읽어들인다.
+        //read 역할
         File file = new File(filePath);
         if (!file.exists()) {
             try (FileWriter fw = new FileWriter(file)) {
@@ -99,9 +58,6 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
             } else{
                 List<Student> studentList = parseJson(json);
                 StudentManager.getInstance().setStudentList(studentList);
-                for (Student student : StudentManager.getInstance().getStudentList()) {
-                    System.out.println(student);
-                }
             }
 
         } catch (IOException e) {
@@ -145,34 +101,69 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
 
 
     @Override
-    public void input() {
-        //add
-        System.out.println("StudentDBIO input 이벤트!");
+    public void input(Object student) {
+        if (!(student instanceof Student)) {
+            System.out.println("⚠️ 잘못된 데이터 타입입니다.");
+            return;
+        }
+
+        Student newStudent = (Student) student;
+        File file = new File(filePath);
+
+        try {
+            // ✅ 기존 데이터 불러오기
+            String json = file.exists() ? new String(Files.readAllBytes(Paths.get(filePath))) : "{ \"students\": [] }";
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
+            JSONArray studentArray = (JSONArray) jsonObject.get("students");
+
+            // ✅ 새로운 학생 데이터 추가
+            JSONObject studentObj = new JSONObject();
+            studentObj.put("sno", newStudent.getSno());
+            studentObj.put("name", newStudent.getName());
+            studentObj.put("korean", newStudent.getKorean());
+            studentObj.put("english", newStudent.getEnglish());
+            studentObj.put("math", newStudent.getMath());
+            studentObj.put("science", newStudent.getScience());
+            studentObj.put("total", newStudent.getTotal());
+            studentObj.put("average", newStudent.getAverage());
+            studentObj.put("grade", newStudent.getGrade());
+
+            studentArray.add(studentObj);
+            jsonObject.put("students", studentArray);
+
+            // ✅ JSON 파일에 저장
+            try (FileWriter fileWriter = new FileWriter(filePath)) {
+                fileWriter.write(jsonObject.toJSONString());
+            }
+
+            System.out.println("✅ 학생 정보가 JSON 파일에 추가되었습니다!");
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    //DBIO 에서 일어나는 행위는 콜백이 필요하다.
-    //StudentManager의 수행 시점은 DBIO의 이벤트 이 후 필요.
     @Override
     public void output() {
-        System.out.println(getClass().getName());
+
     }
     //출력 할 데이터를 json 파일에서 로드한다.
 
     @Override
     public void sortByName() {
-        System.out.println(getClass().getName());
+
     }
     //json 파일에서 읽어온 데이터를 학번 순 으로 정렬한다.
 
     @Override
     public void sortByTotal() {
-        System.out.println(getClass().getName());
+
     }
     //json 파일에서 읽어온 데이터를 성적 순 으로 정렬한다.
 
     @Override
     public void search(String sno) {
-        System.out.println(getClass().getName());
+
     }
     //json 파일에서 특정 학번으로 데이터를 찾는다.
 
@@ -180,8 +171,4 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     //DBIO가 반환한 데이터를 StudentManager가 입력받음
     //학생 관련 데이터를 가공하는 메서드는 해당 클래스에서 추상함수로 명시
 
-    abstract void print();
-    //서브클래스가 print 메서드를 강제 구현 하도록
-    //print는 유저에게 보여 줄 데이터
-    //최종 데이터는 Manager에게 있으니 Manager의 list를 출력 하면 됨.
 }
