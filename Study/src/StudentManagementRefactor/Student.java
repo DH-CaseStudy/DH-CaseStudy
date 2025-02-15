@@ -12,10 +12,10 @@ public class Student {
     private int math;
     private int science;
     private int total;
-    private float average;
+    private double average;
     private String grade;
 
-    public Student(String sno, String name, int korean, int english, int math, int science, int total, float average, String grade) {
+    public Student(String sno, String name, int korean, int english, int math, int science, int total, double average, String grade) {
         this.sno = sno;
         this.name = name;
         this.korean = korean;

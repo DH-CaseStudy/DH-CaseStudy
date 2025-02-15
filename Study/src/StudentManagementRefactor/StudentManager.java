@@ -10,6 +10,14 @@ public class StudentManager extends StudentDBIO{
        super();
     }
 
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
     //가공될 데이터를 정의
 
     @Override

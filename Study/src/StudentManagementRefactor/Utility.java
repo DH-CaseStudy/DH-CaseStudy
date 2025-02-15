@@ -29,13 +29,10 @@ public class Utility<T> {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | NullPointerException e) {
                 System.out.println("올바른 타입을 입력하세요.");
-            } catch (NullPointerException e) {
-                System.out.println("잘못 입력 하였습니다.");
+                //System.out.println("1.입력 2.전체조회 3.학번으로 조회 4.정렬(이름 순) 5.정렬(성적 순) 6.삭제 중 원하는 번호를 입력하세요.");
             }
-
-            return null;
         }
     }
 }
