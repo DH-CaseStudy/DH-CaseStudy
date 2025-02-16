@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        StudentDBIO.getInstance().loadData();
+        StudentManager.getInstance().loadData();
 
         while (true) {
             System.out.println("학생정보 조회 시스템 입니다.");
