@@ -29,37 +29,39 @@ public class StudentManager extends StudentDBIO{
     //가공될 데이터를 정의
 
     @Override
-    public void search(String sno) {
-        Student student = studentList.get(sno);
+    public Student search(String sno) {
+        studentList.clear();
+        Student student =  super.search(sno);
         if(student != null){
-            System.out.println(Student.getTableHeader());
-            System.out.println(student);
+            studentList.put(student.getSno(), student);
         } else {
             System.out.println("해당 학번의 학생은 존재하지 않습니다.");
         }
 
+        return null;
     }
 
     @Override
-    public void sortByTotal() {
+    public HashMap<String, Student> sortByTotal() {
+        studentList.clear();
+        studentList = super.sortByTotal();
         if(studentList.isEmpty()){
-            System.out.println("학생 데이터가 없습니다.");
-        } else {
-            System.out.println(Student.getTableHeader());
-            studentList.values().stream().sorted(Comparator.comparing(Student::getTotal).reversed())
-                    .forEach(System.out::println);
+            System.out.println("데이터가 없습니다.");
         }
+
+        return null;
     }
 
     @Override
-    public void sortByName() {
+    public HashMap<String, Student> sortByName() {
+        studentList.clear();
+        studentList = super.sortByName();
+
         if(studentList.isEmpty()){
-            System.out.println("학생 데이터가 없습니다.");
-        } else {
-            System.out.println(Student.getTableHeader());
-            studentList.values().stream().sorted(Comparator.comparing(Student::getName))
-                    .forEach(System.out::println);
+            System.out.println("데이터가 없습니다.");
         }
+
+        return null;
     }
 
 

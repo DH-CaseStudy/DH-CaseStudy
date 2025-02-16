@@ -54,10 +54,17 @@ public class Main {
                     System.out.println("조회 하고자 하는 학번을 입력하세요.");
                     String searchkey = Utility.readInput(String.class);
                     StudentManager.getInstance().search(searchkey);
+                    StudentManager.getInstance().output();
                     break;
 
-                case 4 : StudentManager.getInstance().sortByName(); break;
-                case 5 : StudentManager.getInstance().sortByTotal(); break;
+                case 4 :
+                    StudentManager.getInstance().sortByName();
+                    StudentManager.getInstance().output();
+                    break;
+                case 5 :
+                    StudentManager.getInstance().sortByTotal();
+                    StudentManager.getInstance().output();
+                    break;
                 case 6 :
                     System.out.println("삭제 하고자 하는 학번을 입력하세요.");
                     String deletekey = Utility.readInput(String.class);

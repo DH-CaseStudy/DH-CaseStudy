@@ -8,24 +8,20 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.text.Collator;
+import java.util.*;
 
 public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     // * 데이터 저장, 로드, JSON 파싱 담당 (saveData(), loadData())
 
     private static StudentDBIO instance;
-    //파일 입출력(혹은 DB)는 전역에 단일 객체로 접근하는것이 안전하다고 생각.
-    //여러 객체가 생성되서 테이블의 무결성이 훼손되는 것을 방지한다.
-
     private static final String filePath = "src/StudentManagementRefactor/students.json";
 
-    protected StudentDBIO() { }
+    protected StudentDBIO() {}
 
     public static StudentDBIO getInstance() {
         if (instance == null) {
-            instance = StudentManager.getInstance(); // 기본 인스턴스를 StudentManager로 설정
+            instance = StudentManager.getInstance();
         }
         return instance;
     }
@@ -34,32 +30,10 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
         return filePath;
     }
 
-
     @Override
-    public void loadData() throws IOException {
-        //json 파일에 있는 모든 학생들의 정보를 읽어들인다.
-        //read 역할
-        File file = new File(filePath);
-        if (!file.exists()) {
-            try (FileWriter fw = new FileWriter(file)) {
-                fw.write("{ \"students\": [] }"); // ✅ 빈 배열을 기본값으로 설정
-            }
-            return;
-        }
-
-        try {
-            String json = new String(Files.readAllBytes(Paths.get(filePath)));
-            if (json.trim().isEmpty() || json.equals("{ \"students\": [] }"))
-            {
-                System.out.println("데이터가 비어있습니다.");
-            } else{
-                HashMap<String, Student> studentList = parseJson(json);
-                StudentManager.getInstance().setStudentList(studentList);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void loadData() {
+        HashMap<String, Student> studentList = parseJson();
+        StudentManager.getInstance().setStudentList(studentList);
     }
 
     @Override
@@ -69,117 +43,71 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
             return;
         }
 
-        Student newStudent = (Student) student;
-        File file = new File(filePath);
+        HashMap<String, Student> studentMap = parseJson();
+        studentMap.put(((Student) student).getSno(), (Student) student);
+        saveJson(studentMap);
 
-        try {
-            // ✅ 기존 데이터 불러오기
-            String json = file.exists() ? new String(Files.readAllBytes(Paths.get(filePath))) : "{ \"students\": [] }";
-            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
-            JSONArray studentArray = (JSONArray) jsonObject.get("students");
-
-            // ✅ 새로운 학생 데이터 추가
-            JSONObject studentObj = new JSONObject();
-            studentObj.put("sno", newStudent.getSno());
-            studentObj.put("name", newStudent.getName());
-            studentObj.put("korean", newStudent.getKorean());
-            studentObj.put("english", newStudent.getEnglish());
-            studentObj.put("math", newStudent.getMath());
-            studentObj.put("science", newStudent.getScience());
-            studentObj.put("total", newStudent.getTotal());
-            studentObj.put("average", newStudent.getAverage());
-            studentObj.put("grade", newStudent.getGrade());
-
-            studentArray.add(studentObj);
-            jsonObject.put("students", studentArray);
-
-            // ✅ JSON 파일에 저장
-            try (FileWriter fileWriter = new FileWriter(filePath)) {
-                fileWriter.write(jsonObject.toJSONString());
-            }
-
-            System.out.println("학생 정보가 입력되었습니다.");
-
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
+        System.out.println("학생 정보가 입력되었습니다.");
     }
 
     @Override
-    public void search(String sno) {
-
+    public Student search(String sno) {
+        HashMap<String, Student> studentMap = parseJson();
+        return studentMap.getOrDefault(sno, null);
     }
 
     @Override
-    public void sortByName() {
-
+    public HashMap<String, Student> sortByName() {
+        HashMap<String, Student> studentMap = parseJson();
+        return sortByComparator(studentMap, Comparator.comparing(Student::getName, Collator.getInstance()));
     }
 
     @Override
-    public void sortByTotal() {
-
-    }
-
-    @Override
-    public void output() {
-
+    public HashMap<String, Student> sortByTotal() {
+        HashMap<String, Student> studentMap = parseJson();
+        return sortByComparator(studentMap, Comparator.comparingInt(Student::getTotal).reversed());
     }
 
     @Override
     public void deleteStudent(String sno) {
-        File file = new File(filePath);
+        HashMap<String, Student> studentMap = parseJson();
 
-        if (!file.exists()) {
-            System.out.println("데이터 파일이 존재하지 않습니다.");
+        if (!studentMap.containsKey(sno)) {
+            System.out.println("학번 '" + sno + "'에 해당하는 학생을 찾을 수 없습니다.");
             return;
         }
 
-        try {
-            // ✅ JSON 파일 읽기
-            String json = new String(Files.readAllBytes(Paths.get(filePath)));
-            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
-            JSONArray studentArray = (JSONArray) jsonObject.get("students");
-
-            // ✅ 학번(`sno`)에 해당하는 학생 찾기
-            boolean found = false;
-            for (int i = 0; i < studentArray.size(); i++) {
-                JSONObject studentObj = (JSONObject) studentArray.get(i);
-                if (studentObj.get("sno").equals(sno)) {
-                    studentArray.remove(i); // ✅ 해당 학생 제거
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found) {
-                System.out.println(" 학번 '" + sno + "'에 해당하는 학생을 찾을 수 없습니다.");
-                return;
-            }
-
-            // 수정된 JSON 데이터 저장
-            jsonObject.put("students", studentArray);
-            try (FileWriter fileWriter = new FileWriter(filePath)) {
-                fileWriter.write(jsonObject.toJSONString());
-            }
-
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
+        studentMap.remove(sno);
+        saveJson(studentMap);
+        System.out.println("학번 '" + sno + "' 학생 정보가 삭제되었습니다.");
     }
 
+    @Override
+    public void output() {
+        HashMap<String, Student> studentMap = parseJson();
+        studentMap.values().forEach(System.out::println);
+    }
 
-    private HashMap<String, Student> parseJson(String json) {
+    /**
+     * JSON 파일을 읽어 HashMap<String, Student>으로 변환하는 메서드
+     */
+    private HashMap<String, Student> parseJson() {
         HashMap<String, Student> students = new HashMap<>();
-        JSONParser parser = new JSONParser();
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            return students; // 파일이 없으면 빈 HashMap 반환
+        }
 
         try {
-            // ✅ JSON 문자열을 `JSONObject`로 변환
-            JSONObject jsonObject = (JSONObject) parser.parse(json);
+            String json = new String(Files.readAllBytes(Paths.get(filePath)));
+            if (json.trim().isEmpty() || json.equals("{ \"students\": [] }")) {
+                return students;
+            }
 
-            // ✅ "students" 키에서 `JSONArray` 가져오기
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
             JSONArray jsonArray = (JSONArray) jsonObject.get("students");
 
-            // ✅ 배열을 순회하며 `Student` 객체 생성
             for (Object obj : jsonArray) {
                 JSONObject studentObj = (JSONObject) obj;
                 Student student = new Student(
@@ -195,11 +123,57 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
                 );
                 students.put(student.getSno(), student);
             }
-        } catch (ParseException e) {
+
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
         return students;
     }
 
+    /**
+     * HashMap<String, Student>을 JSON 파일로 저장하는 메서드
+     */
+    private void saveJson(HashMap<String, Student> studentMap) {
+        JSONArray studentArray = new JSONArray();
+
+        for (Student student : studentMap.values()) {
+            JSONObject studentObj = new JSONObject();
+            studentObj.put("sno", student.getSno());
+            studentObj.put("name", student.getName());
+            studentObj.put("korean", student.getKorean());
+            studentObj.put("english", student.getEnglish());
+            studentObj.put("math", student.getMath());
+            studentObj.put("science", student.getScience());
+            studentObj.put("total", student.getTotal());
+            studentObj.put("average", student.getAverage());
+            studentObj.put("grade", student.getGrade());
+
+            studentArray.add(studentObj);
+        }
+
+        JSONObject newJsonObject = new JSONObject();
+        newJsonObject.put("students", studentArray);
+
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
+            fileWriter.write(newJsonObject.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 주어진 Comparator를 이용해 정렬된 HashMap을 반환하는 메서드
+     */
+    private HashMap<String, Student> sortByComparator(HashMap<String, Student> studentMap, Comparator<Student> comparator) {
+        List<Student> sortedList = new ArrayList<>(studentMap.values());
+        sortedList.sort(comparator);
+
+        HashMap<String, Student> sortedMap = new LinkedHashMap<>();
+        for (Student student : sortedList) {
+            sortedMap.put(student.getSno(), student);
+        }
+
+        return sortedMap;
+    }
 }

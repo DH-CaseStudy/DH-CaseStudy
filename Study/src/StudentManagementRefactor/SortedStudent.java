@@ -1,8 +1,10 @@
 package StudentManagementRefactor;
 
+import java.util.HashMap;
+
 public interface SortedStudent {
-    void sortByName();
-    void sortByTotal();
+    HashMap<String, Student> sortByName();
+    HashMap<String, Student> sortByTotal();
     //정렬하는 기능
     //1. 학번으로 정렬
     //2. 성적으로 정렬
