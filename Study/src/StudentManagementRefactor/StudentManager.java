@@ -44,8 +44,17 @@ public class StudentManager extends StudentDBIO{
 
     @Override
     public void output() {
-        for(Student student : studentList){
-            System.out.println(student);
+        if (studentList.isEmpty()) {
+            System.out.println("학생 데이터가 없습니다.");
+        } else {
+            System.out.println(Student.getTableHeader());
+            for (Student student : studentList) {
+                System.out.println(student); // 학생 정보 출력
+            }
         }
+    }
+
+    public void clearList(){
+        getStudentList().clear();
     }
 }

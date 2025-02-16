@@ -9,7 +9,7 @@ public class Main {
         //StudentDBIO.getInstance().input(); // () => true {output});
         //콜백으로 output 구현.
         //목요일까지
-        //근거! 가 있는 향상될 수 있는 점
+        //근거! 가 있는 향상될 수 있는 점2
         StudentDBIO.getInstance().loadData();
 
 
@@ -42,15 +42,13 @@ public class Main {
                     else if (average >= 60) grade = "D";
                     else grade = "F";
 
-                    System.out.println(total);
-                    System.out.println(average);
                     Student student = new Student(sno, name, korean, english, math, science, total, average, grade);
                     StudentDBIO.getInstance().input(student); // json 파일에 데이터 입력 발생
                     break;
 
                 case 2 :
-                    StudentDBIO.getInstance().loadData();
-                    StudentManager.getInstance().output();
+                    StudentDBIO.getInstance().loadData(); //json 데이터 로드
+                    StudentManager.getInstance().output(); // 출력.
                     break;
                 case 3 :
                     System.out.println("학번을 입력하세요.");

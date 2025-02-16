@@ -136,18 +136,12 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
                 fileWriter.write(jsonObject.toJSONString());
             }
 
-            System.out.println("✅ 학생 정보가 JSON 파일에 추가되었습니다!");
+            System.out.println("학생 정보가 입력되었습니다.");
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void output() {
-
-    }
-    //출력 할 데이터를 json 파일에서 로드한다.
 
     @Override
     public void sortByName() {
