@@ -6,7 +6,7 @@ package StudentManagementRefactor;
  * 이 인터페이스를 구현하는 클래스는 학생 데이터를 저장하는 기능을 제공해야 한다.
  * </p>
  *
- * @author 작성자명
+ * @author 이동휘
  * @version 1.0
  * @since 2024-02-16
  */

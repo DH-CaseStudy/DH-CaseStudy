@@ -16,7 +16,7 @@ import java.util.HashMap;
  * 출력 기능은 포함하지 않으며, 정렬된 데이터는 반환만 한다.
  * </p>
  *
- * @author 작성자명
+ * @author 이동휘
  * @version 1.0
  * @since 2024-02-16
  */

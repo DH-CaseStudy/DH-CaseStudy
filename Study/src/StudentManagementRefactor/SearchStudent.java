@@ -5,10 +5,9 @@ package StudentManagementRefactor;
  * <p>
  * 이 인터페이스는 {@link StudentOutput}을 확장하며,
  * 학번을 기준으로 특정 학생을 검색하는 기능을 제공한다.
- * 출력 기능은 포함하지 않는다.
  * </p>
  *
- * @author 작성자명
+ * @author 이동휘
  * @version 1.0
  * @since 2024-02-16
  */

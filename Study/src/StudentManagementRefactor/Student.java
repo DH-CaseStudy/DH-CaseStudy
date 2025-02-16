@@ -3,13 +3,13 @@ package StudentManagementRefactor;
 import lombok.Data;
 
 /**
- * 학생 정보를 저장하는 DTO (Data Transfer Object) 클래스.
+ * 학생 정보를 저장하는 포맷을 제공하는 DTO (Data Transfer Object) 클래스.
  * <p>
  * 학생의 학번, 이름, 과목별 점수, 총점, 평균, 학점을 저장하며,
  * 데이터를 전송하는 역할을 한다.
  * </p>
  *
- * @author 작성자명
+ * @author 이동휘
  * @version 1.0
  * @since 2024-02-16
  */

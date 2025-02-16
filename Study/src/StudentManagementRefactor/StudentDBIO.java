@@ -89,7 +89,7 @@ public class StudentDBIO extends ObjectIO implements StudentIO {
     }
 
     /**
-     * 학생 목록을 이름 기준으로 정렬한다.
+     * json 데이터의 학생 목록을 이름 기준으로 정렬하고 반환한다.
      *
      * @return 이름 기준으로 정렬된 HashMap
      */
@@ -100,7 +100,7 @@ public class StudentDBIO extends ObjectIO implements StudentIO {
     }
 
     /**
-     * 학생 목록을 총점 기준으로 내림차순 정렬한다.
+     * json 데이터의 학생 점수를 기준으로 정렬하고 반환한다.
      *
      * @return 총점 기준으로 정렬된 HashMap
      */
@@ -154,7 +154,7 @@ public class StudentDBIO extends ObjectIO implements StudentIO {
         File file = new File(filePath);
 
         if (!file.exists()) {
-            return students; // 파일이 없으면 빈 HashMap 반환
+            return students; // 공 데이터를 담아서 nul 방지
         }
 
         try {
@@ -233,7 +233,7 @@ public class StudentDBIO extends ObjectIO implements StudentIO {
         List<Student> sortedList = new ArrayList<>(studentMap.values());
         sortedList.sort(comparator);
 
-        HashMap<String, Student> sortedMap = new LinkedHashMap<>(); // 순서를 보장하기 위해
+        HashMap<String, Student> sortedMap = new LinkedHashMap<>(); //순서를 보장하기 위해
         for (Student student : sortedList) {
             sortedMap.put(student.getSno(), student);
         }

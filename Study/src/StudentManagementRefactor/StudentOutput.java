@@ -7,7 +7,7 @@ package StudentManagementRefactor;
  * 출력할 데이터는 {@code StudentManager}에서 가공하여 제공한다.
  * </p>
  *
- * @author 작성자명
+ * @author 이동휘
  * @version 1.0
  * @since 2024-02-16
  */

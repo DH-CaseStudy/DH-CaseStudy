@@ -3,13 +3,13 @@ package StudentManagementRefactor;
 import java.util.HashMap;
 
 /**
- * 학생 관리 클래스.
+ * 학생 데이터 관리 클래스.
  * <p>
  * 학생 데이터를 관리하며, 데이터 저장 및 조회, 정렬 등의 기능을 제공한다.
  * 싱글턴 패턴을 사용하여 하나의 인스턴스만 유지한다.
  * </p>
  *
- * @author 작성자명
+ * @author 이동휘
  * @version 1.0
  * @since 2024-02-16
  */
