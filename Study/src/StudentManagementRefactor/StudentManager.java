@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @version 1.0
  * @since 2024-02-16
  */
-public class StudentManager extends StudentDBIO{
+public class StudentManager {
     /** StudentManager의 유일한 인스턴스 (싱글턴). */
     private static final StudentManager INSTANCE = new StudentManager();
 
@@ -42,9 +42,7 @@ public class StudentManager extends StudentDBIO{
     /**
      * 데이터베이스에서 학생 데이터를 로드한다.
      *
-     * @return
      */
-    @Override
     public HashMap<String, Student> loadData() {
         studentList = studentDBIO.loadData();
         return null;
@@ -56,7 +54,6 @@ public class StudentManager extends StudentDBIO{
      * @param sno 검색할 학생의 학번
      * @return 학번에 해당하는 학생 객체 (없으면 null 반환)
      */
-    @Override
     public Student search(String sno) {
         printStudent(studentDBIO.search(sno));
         return null;
@@ -65,23 +62,17 @@ public class StudentManager extends StudentDBIO{
     /**
      * 총점 기준으로 학생 목록을 정렬한다.
      *
-     * @return
      */
-    @Override
-    public HashMap<String, Student> sortByTotal() {
+    public void sortByTotal() {
         studentList = studentDBIO.sortByTotal();
-        return null;
     }
 
     /**
      * 이름 기준으로 학생 목록을 정렬한다.
      *
-     * @return
      */
-    @Override
-    public HashMap<String, Student> sortByName() {
+    public void sortByName() {
         studentList = studentDBIO.sortByName();
-        return null;
     }
 
     /**
@@ -90,7 +81,6 @@ public class StudentManager extends StudentDBIO{
      *
      * @param student 추가할 학생 객체
      */
-    @Override
     public void input(Student student) {
         studentDBIO.input(student);
         studentList.put(student.getSno(), student);
@@ -101,18 +91,14 @@ public class StudentManager extends StudentDBIO{
      * 삭제 후 최신 학생 목록을 반영한다.
      *
      * @param sno 삭제할 학생의 학번
-     * @return
      */
-    @Override
-    public HashMap<String, Student> deleteStudent(String sno) {
+    public void deleteStudent(String sno) {
         studentList = studentDBIO.deleteStudent(sno);
-        return null;
     }
 
     /**
      * 저장된 학생 데이터를 출력한다.
      */
-    @Override
     public void output() {
         if (studentList.isEmpty()) {
             System.out.println("학생 데이터가 없습니다.");
