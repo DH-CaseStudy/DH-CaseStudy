@@ -48,14 +48,16 @@ public class Main {
 
                 case 2 :
                     StudentDBIO.getInstance().loadData(); //json 데이터 로드
-                    StudentManager.getInstance().output(); // 출력.
+                    StudentManager.getInstance().output();
                     break;
                 case 3 :
                     System.out.println("학번을 입력하세요.");
-                    String search = Utility.readInput(String.class);
+                    String key = Utility.readInput(String.class);
+                    StudentManager.getInstance().search(key);
+                    break;
 
-                case 4 : break;
-                case 5 : break;
+                case 4 : StudentManager.getInstance().sortByName(); break;
+                case 5 : StudentManager.getInstance().sortByTotal(); break;
                 case 6 : break;
                 default :
                     System.out.println("잘못 입력 하셨습니다.");

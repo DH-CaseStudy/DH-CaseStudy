@@ -1,11 +1,13 @@
 package StudentManagementRefactor;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public class StudentManager extends StudentDBIO{
     private static final StudentManager INSTANCE = new StudentManager();
-    private List<Student> studentList = new ArrayList<>();
+    private HashMap<String, Student> studentList = new HashMap<>(); //키,밸류 형태 -> sno를 키로 조회 해야 하기 때문
 
     protected StudentManager() {
        super();
@@ -15,11 +17,11 @@ public class StudentManager extends StudentDBIO{
         return INSTANCE;
     }
 
-    public List<Student> getStudentList() {
+    public HashMap<String, Student> getStudentList() {
         return studentList;
     }
 
-    public void setStudentList(List<Student> studentList) {
+    public void setStudentList(HashMap<String, Student>  studentList) {
         this.studentList.clear();
         this.studentList = studentList;
     }
@@ -28,17 +30,36 @@ public class StudentManager extends StudentDBIO{
 
     @Override
     public void search(String sno) {
+        Student student = studentList.get(sno);
+        if(student != null){
+            System.out.println(Student.getTableHeader());
+            System.out.println(student);
+        } else {
+            System.out.println("해당 학번의 학생은 존재하지 않습니다.");
+        }
 
     }
 
     @Override
     public void sortByTotal() {
-
+        if(studentList.isEmpty()){
+            System.out.println("학생 데이터가 없습니다.");
+        } else {
+            System.out.println(Student.getTableHeader());
+            studentList.values().stream().sorted(Comparator.comparing(Student::getTotal).reversed())
+                    .forEach(System.out::println);
+        }
     }
 
     @Override
     public void sortByName() {
-
+        if(studentList.isEmpty()){
+            System.out.println("학생 데이터가 없습니다.");
+        } else {
+            System.out.println(Student.getTableHeader());
+            studentList.values().stream().sorted(Comparator.comparing(Student::getName))
+                    .forEach(System.out::println);
+        }
     }
 
 
@@ -48,8 +69,8 @@ public class StudentManager extends StudentDBIO{
             System.out.println("학생 데이터가 없습니다.");
         } else {
             System.out.println(Student.getTableHeader());
-            for (Student student : studentList) {
-                System.out.println(student); // 학생 정보 출력
+            for(Student students : studentList.values()){
+                System.out.println(students);
             }
         }
     }

@@ -9,6 +9,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class StudentDBIO extends ObjectIO implements StudentIO {
@@ -56,7 +57,7 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
             {
                 System.out.println("데이터가 비어있습니다.");
             } else{
-                List<Student> studentList = parseJson(json);
+                HashMap<String, Student> studentList = parseJson(json);
                 StudentManager.getInstance().setStudentList(studentList);
             }
 
@@ -65,8 +66,8 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
         }
     }
 
-    private List<Student> parseJson(String json) {
-        List<Student> students = new ArrayList<>();
+    private HashMap<String, Student> parseJson(String json) {
+        HashMap<String, Student> students = new HashMap<>();
         JSONParser parser = new JSONParser();
 
         try {
@@ -90,7 +91,7 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
                         ((Double) studentObj.get("average")).floatValue(), // 평균을 Float으로 변환
                         (String) studentObj.get("grade")
                 );
-                students.add(student);
+                students.put(student.getSno(), student);
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -161,6 +162,10 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     }
     //json 파일에서 특정 학번으로 데이터를 찾는다.
 
+    @Override
+    public void output(){
+
+    }
     //input output sort search 는 DBIO의 책임
     //DBIO가 반환한 데이터를 StudentManager가 입력받음
     //학생 관련 데이터를 가공하는 메서드는 해당 클래스에서 추상함수로 명시
