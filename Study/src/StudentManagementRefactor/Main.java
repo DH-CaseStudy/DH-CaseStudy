@@ -46,26 +46,26 @@ public class Main {
                     StudentDBIO.getInstance().input(student); // json 파일에 데이터 입력 발생
                     break;
 
-                case 2 :
+                case 2 : //전체 테이블 조회
                     StudentDBIO.getInstance().loadData(); //json 데이터 로드
                     StudentManager.getInstance().output();
                     break;
-                case 3 :
+                case 3 : //특정 행 조회
                     System.out.println("조회 하고자 하는 학번을 입력하세요.");
                     String searchkey = Utility.readInput(String.class);
                     StudentManager.getInstance().search(searchkey);
                     StudentManager.getInstance().output();
                     break;
 
-                case 4 :
+                case 4 : //전체 테이블을 이름 (가->나->다) 순으로 정렬
                     StudentManager.getInstance().sortByName();
                     StudentManager.getInstance().output();
                     break;
-                case 5 :
+                case 5 : //전체 테이블을 성적 (높은) 순으로 정렬
                     StudentManager.getInstance().sortByTotal();
                     StudentManager.getInstance().output();
                     break;
-                case 6 :
+                case 6 : //전체 테이블에서 특정 행을 제거하고 전체 테이블 반환
                     System.out.println("삭제 하고자 하는 학번을 입력하세요.");
                     String deletekey = Utility.readInput(String.class);
                     StudentDBIO.getInstance().deleteStudent(deletekey); //실제 DB에서 삭제
