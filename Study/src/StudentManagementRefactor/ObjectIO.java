@@ -1,8 +1,9 @@
 package StudentManagementRefactor;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public abstract class ObjectIO<T> {
-    abstract void loadData() throws IOException;
+    abstract HashMap<String, Student> loadData() throws IOException;
 
 }

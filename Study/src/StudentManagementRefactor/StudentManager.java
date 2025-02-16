@@ -29,13 +29,19 @@ public class StudentManager extends StudentDBIO{
     //가공될 데이터를 정의
 
     @Override
+    public HashMap<String, Student> loadData(){
+        studentList.clear();
+        studentList = super.loadData();
+
+        return null;
+    }
+
+    @Override
     public Student search(String sno) {
         studentList.clear();
         Student student =  super.search(sno);
         if(student != null){
             studentList.put(student.getSno(), student);
-        } else {
-            System.out.println("해당 학번의 학생은 존재하지 않습니다.");
         }
 
         return null;
@@ -45,9 +51,6 @@ public class StudentManager extends StudentDBIO{
     public HashMap<String, Student> sortByTotal() {
         studentList.clear();
         studentList = super.sortByTotal();
-        if(studentList.isEmpty()){
-            System.out.println("데이터가 없습니다.");
-        }
 
         return null;
     }
@@ -56,10 +59,6 @@ public class StudentManager extends StudentDBIO{
     public HashMap<String, Student> sortByName() {
         studentList.clear();
         studentList = super.sortByName();
-
-        if(studentList.isEmpty()){
-            System.out.println("데이터가 없습니다.");
-        }
 
         return null;
     }

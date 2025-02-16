@@ -31,9 +31,9 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     }
 
     @Override
-    public void loadData() {
+    public HashMap<String, Student> loadData() {
         HashMap<String, Student> studentList = parseJson();
-        StudentManager.getInstance().setStudentList(studentList);
+        return studentList;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Main {
                     break;
 
                 case 2: // 전체 테이블 조회
-                    StudentDBIO.getInstance().loadData();
+                    StudentManager.getInstance().loadData();
                     StudentManager.getInstance().output();
                     break;
 
