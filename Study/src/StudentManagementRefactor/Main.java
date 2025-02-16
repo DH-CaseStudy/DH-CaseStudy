@@ -51,14 +51,18 @@ public class Main {
                     StudentManager.getInstance().output();
                     break;
                 case 3 :
-                    System.out.println("학번을 입력하세요.");
-                    String key = Utility.readInput(String.class);
-                    StudentManager.getInstance().search(key);
+                    System.out.println("조회 하고자 하는 학번을 입력하세요.");
+                    String searchkey = Utility.readInput(String.class);
+                    StudentManager.getInstance().search(searchkey);
                     break;
 
                 case 4 : StudentManager.getInstance().sortByName(); break;
                 case 5 : StudentManager.getInstance().sortByTotal(); break;
-                case 6 : break;
+                case 6 :
+                    System.out.println("삭제 하고자 하는 학번을 입력하세요.");
+                    String deletekey = Utility.readInput(String.class);
+                    StudentDBIO.getInstance().deleteStudent(deletekey); //실제 DB에서 삭제
+                    break;
                 default :
                     System.out.println("잘못 입력 하셨습니다.");
             }

@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class StudentManager extends StudentDBIO{
+    //    * 데이터 가공 및 관리 담당
+    //    * 출력 및 조회 기능을 포함
     private static final StudentManager INSTANCE = new StudentManager();
     private HashMap<String, Student> studentList = new HashMap<>(); //키,밸류 형태 -> sno를 키로 조회 해야 하기 때문
 
-    protected StudentManager() {
-       super();
-    }
+    private StudentManager() { }
 
     public static StudentManager getInstance() {
         return INSTANCE;
@@ -73,6 +73,13 @@ public class StudentManager extends StudentDBIO{
                 System.out.println(students);
             }
         }
+    }
+
+    @Override
+    public void deleteStudent(String sno) {
+        super.deleteStudent(sno);
+        studentList.remove(sno);
+        System.out.println(sno + "학생 데이터가 제거되었습니다.");
     }
 
     public void clearList(){

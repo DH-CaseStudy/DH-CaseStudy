@@ -13,19 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class StudentDBIO extends ObjectIO implements StudentIO {
-    //파일의 입출력을 담당한다 이후에 DB에 접근하는 로직으로 변경.
+    // * 데이터 저장, 로드, JSON 파싱 담당 (saveData(), loadData())
 
     private static StudentDBIO instance;
-    //왜 static final 로 선언했을까?
     //파일 입출력(혹은 DB)는 전역에 단일 객체로 접근하는것이 안전하다고 생각.
     //여러 객체가 생성되서 테이블의 무결성이 훼손되는 것을 방지한다.
-    //StudentManager 클래스는 StudentDBIO를 상속받았기 때문에 StudentDBIO 타입의 인스턴스 생성이 가능하다.
 
     private static final String filePath = "src/StudentManagementRefactor/students.json";
 
-    protected StudentDBIO() {
-        super();
-    }
+    protected StudentDBIO() { }
 
     public static StudentDBIO getInstance() {
         if (instance == null) {
@@ -66,45 +62,10 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
         }
     }
 
-    private HashMap<String, Student> parseJson(String json) {
-        HashMap<String, Student> students = new HashMap<>();
-        JSONParser parser = new JSONParser();
-
-        try {
-            // ✅ JSON 문자열을 `JSONObject`로 변환
-            JSONObject jsonObject = (JSONObject) parser.parse(json);
-
-            // ✅ "students" 키에서 `JSONArray` 가져오기
-            JSONArray jsonArray = (JSONArray) jsonObject.get("students");
-
-            // ✅ 배열을 순회하며 `Student` 객체 생성
-            for (Object obj : jsonArray) {
-                JSONObject studentObj = (JSONObject) obj;
-                Student student = new Student(
-                        (String) studentObj.get("sno"),
-                        (String) studentObj.get("name"),
-                        ((Long) studentObj.get("korean")).intValue(),
-                        ((Long) studentObj.get("english")).intValue(),
-                        ((Long) studentObj.get("math")).intValue(),
-                        ((Long) studentObj.get("science")).intValue(),
-                        ((Long) studentObj.get("total")).intValue(),
-                        ((Double) studentObj.get("average")).floatValue(), // 평균을 Float으로 변환
-                        (String) studentObj.get("grade")
-                );
-                students.put(student.getSno(), student);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return students;
-    }
-
-
     @Override
     public void input(Object student) {
         if (!(student instanceof Student)) {
-            System.out.println("⚠️ 잘못된 데이터 타입입니다.");
+            System.out.println("잘못된 데이터 타입입니다.");
             return;
         }
 
@@ -145,29 +106,100 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     }
 
     @Override
+    public void search(String sno) {
+
+    }
+
+    @Override
     public void sortByName() {
 
     }
-    //json 파일에서 읽어온 데이터를 학번 순 으로 정렬한다.
 
     @Override
     public void sortByTotal() {
 
     }
-    //json 파일에서 읽어온 데이터를 성적 순 으로 정렬한다.
 
     @Override
-    public void search(String sno) {
+    public void output() {
 
     }
-    //json 파일에서 특정 학번으로 데이터를 찾는다.
 
     @Override
-    public void output(){
+    public void deleteStudent(String sno) {
+        File file = new File(filePath);
 
+        if (!file.exists()) {
+            System.out.println("데이터 파일이 존재하지 않습니다.");
+            return;
+        }
+
+        try {
+            // ✅ JSON 파일 읽기
+            String json = new String(Files.readAllBytes(Paths.get(filePath)));
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
+            JSONArray studentArray = (JSONArray) jsonObject.get("students");
+
+            // ✅ 학번(`sno`)에 해당하는 학생 찾기
+            boolean found = false;
+            for (int i = 0; i < studentArray.size(); i++) {
+                JSONObject studentObj = (JSONObject) studentArray.get(i);
+                if (studentObj.get("sno").equals(sno)) {
+                    studentArray.remove(i); // ✅ 해당 학생 제거
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.out.println(" 학번 '" + sno + "'에 해당하는 학생을 찾을 수 없습니다.");
+                return;
+            }
+
+            // 수정된 JSON 데이터 저장
+            jsonObject.put("students", studentArray);
+            try (FileWriter fileWriter = new FileWriter(filePath)) {
+                fileWriter.write(jsonObject.toJSONString());
+            }
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
     }
-    //input output sort search 는 DBIO의 책임
-    //DBIO가 반환한 데이터를 StudentManager가 입력받음
-    //학생 관련 데이터를 가공하는 메서드는 해당 클래스에서 추상함수로 명시
+
+
+    private HashMap<String, Student> parseJson(String json) {
+        HashMap<String, Student> students = new HashMap<>();
+        JSONParser parser = new JSONParser();
+
+        try {
+            // ✅ JSON 문자열을 `JSONObject`로 변환
+            JSONObject jsonObject = (JSONObject) parser.parse(json);
+
+            // ✅ "students" 키에서 `JSONArray` 가져오기
+            JSONArray jsonArray = (JSONArray) jsonObject.get("students");
+
+            // ✅ 배열을 순회하며 `Student` 객체 생성
+            for (Object obj : jsonArray) {
+                JSONObject studentObj = (JSONObject) obj;
+                Student student = new Student(
+                        (String) studentObj.get("sno"),
+                        (String) studentObj.get("name"),
+                        ((Long) studentObj.get("korean")).intValue(),
+                        ((Long) studentObj.get("english")).intValue(),
+                        ((Long) studentObj.get("math")).intValue(),
+                        ((Long) studentObj.get("science")).intValue(),
+                        ((Long) studentObj.get("total")).intValue(),
+                        ((Double) studentObj.get("average")).floatValue(),
+                        (String) studentObj.get("grade")
+                );
+                students.put(student.getSno(), student);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return students;
+    }
 
 }
