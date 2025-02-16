@@ -37,12 +37,7 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     }
 
     @Override
-    public void input(Object student) {
-        if (!(student instanceof Student)) {
-            System.out.println("잘못된 데이터 타입입니다.");
-            return;
-        }
-
+    public void input(Student student) {
         HashMap<String, Student> studentMap = parseJson();
         studentMap.put(((Student) student).getSno(), (Student) student);
         saveJson(studentMap);
