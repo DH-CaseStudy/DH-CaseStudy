@@ -63,6 +63,11 @@ public class StudentManager extends StudentDBIO{
         return null;
     }
 
+    @Override
+    public void input(Student student){
+        super.input(student);
+    }
+
 
     @Override
     public void output() {

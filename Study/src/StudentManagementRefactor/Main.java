@@ -27,7 +27,8 @@ public class Main {
                     String grade = calculateGrade(average);
 
                     Student student = new Student(sno, name, korean, english, math, science, total, average, grade);
-                    StudentDBIO.getInstance().input(student); // JSON 파일에 데이터 입력
+                    //StudentDBIO.getInstance().input(student); // JSON 파일에 데이터 입력
+                    StudentManager.getInstance().input(student); // JSON 파일에 데이터 입력
                     break;
 
                 case 2: // 전체 테이블 조회
@@ -65,7 +66,7 @@ public class Main {
         }
     }
 
-    // 학번(5자리 숫자) 입력 검증 메서드
+    // 학번(5자리 숫자) 입력 검증
     private static String getValidatedStudentNumber() {
         System.out.println("학번을 입력하세요 (5자리 숫자):");
         while (true) {
@@ -77,7 +78,7 @@ public class Main {
         }
     }
 
-    // 점수(0~100 범위) 입력 검증 메서드
+    // 점수(0~100 범위) 입력 검증
     private static int getValidatedScore(String subject) {
         System.out.println(subject + " 점수를 입력하세요 (0~100):");
         while (true) {
@@ -89,7 +90,7 @@ public class Main {
         }
     }
 
-    // ✅ 한글 이름 입력 검증 메서드
+    // 한글 이름 입력 검증
     private static String getValidatedName() {
         System.out.println("이름을 입력하세요 (한글만 가능):");
         while (true) {
@@ -101,7 +102,7 @@ public class Main {
         }
     }
 
-    // ✅ 학점 계산 메서드
+    // 학점 계산
     private static String calculateGrade(double average) {
         if (average >= 90) return "A";
         if (average >= 80) return "B";
