@@ -1,96 +1,58 @@
 package StudentManagementRefactor;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 
-public class StudentManager extends StudentDBIO{
-    //    * 데이터 가공 및 관리 담당
-    //    * 출력 및 조회 기능을 포함
+public class StudentManager {
     private static final StudentManager INSTANCE = new StudentManager();
-    private HashMap<String, Student> studentList = new HashMap<>(); //키,밸류 형태 -> sno를 키로 조회 해야 하기 때문
+    private HashMap<String, Student> studentList = new HashMap<>();
+    private final StudentDBIO studentDBIO;// StudentDBIO를 직접 참조하지 않도록 변경
 
-    private StudentManager() { }
+    private StudentManager() {
+        this.studentDBIO = StudentDBIO.getInstance(); // ✅ 생성자에서 한 번만 초기화
+    }
 
     public static StudentManager getInstance() {
         return INSTANCE;
     }
 
-    public HashMap<String, Student> getStudentList() {
-        return studentList;
-    }
-
-    public void setStudentList(HashMap<String, Student>  studentList) {
+    public void setStudentList(HashMap<String, Student> studentList) {
         this.studentList.clear();
-        this.studentList = studentList;
+        this.studentList.putAll(studentList);
     }
 
-    //가공될 데이터를 정의
-
-    @Override
-    public HashMap<String, Student> loadData(){
-        studentList.clear();
-        studentList = super.loadData();
-
-        return null;
+    public void loadData() {
+        studentList = studentDBIO.loadData();
     }
 
-    @Override
     public Student search(String sno) {
-        studentList.clear();
-        Student student =  super.search(sno);
-        if(student != null){
-            studentList.put(student.getSno(), student);
-        }
-
-        return null;
+        return studentDBIO.search(sno); // 검색은 DB에서 처리하도록 변경
     }
 
-    @Override
-    public HashMap<String, Student> sortByTotal() {
-        studentList.clear();
-        studentList = super.sortByTotal();
-
-        return null;
+    public void sortByTotal() {
+        studentList = studentDBIO.sortByTotal();
     }
 
-    @Override
-    public HashMap<String, Student> sortByName() {
-        studentList.clear();
-        studentList = super.sortByName();
-
-        return null;
+    public void sortByName() {
+        studentList = studentDBIO.sortByName();
     }
 
-    @Override
-    public void input(Student student){
-        super.input(student);
+    public void input(Student student) {
+        studentDBIO.input(student); // 데이터를 DB에 저장하도록 변경
+        studentList.put(student.getSno(), student); // 내부 리스트도 업데이트
     }
 
+    public void deleteStudent(String sno) {
+        studentList = studentDBIO.deleteStudent(sno); // DB에서 삭제 후 최신 리스트 반영
+    }
 
-    @Override
     public void output() {
         if (studentList.isEmpty()) {
             System.out.println("학생 데이터가 없습니다.");
         } else {
             System.out.println(Student.getTableHeader());
-            for(Student students : studentList.values()){
-                System.out.println(students);
+            for (Student student : studentList.values()) {
+                System.out.println(student);
             }
         }
-    }
-
-    @Override
-    public HashMap<String, Student> deleteStudent(String sno) {
-        studentList.clear();
-        studentList = super.deleteStudent(sno);
-        System.out.println(sno + "학생 데이터가 제거되었습니다.");
-
-        return null;
-    }
-
-    public void clearList(){
-        getStudentList().clear();
     }
 }

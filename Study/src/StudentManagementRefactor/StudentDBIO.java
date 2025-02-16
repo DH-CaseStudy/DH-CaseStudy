@@ -11,18 +11,15 @@ import java.nio.file.Paths;
 import java.text.Collator;
 import java.util.*;
 
-public abstract class StudentDBIO extends ObjectIO implements StudentIO {
+public class StudentDBIO extends ObjectIO implements StudentIO {
     // * 데이터 저장, 로드, JSON 파싱 담당 (saveData(), loadData())
 
-    private static StudentDBIO instance;
+    private static final StudentDBIO instance = new StudentDBIO();
     private static final String filePath = "src/StudentManagementRefactor/students.json";
 
     protected StudentDBIO() {}
 
     public static StudentDBIO getInstance() {
-        if (instance == null) {
-            instance = StudentManager.getInstance();
-        }
         return instance;
     }
 
@@ -32,8 +29,7 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
 
     @Override
     public HashMap<String, Student> loadData() {
-        HashMap<String, Student> studentList = parseJson();
-        return studentList;
+        return parseJson();
     }
 
     @Override
