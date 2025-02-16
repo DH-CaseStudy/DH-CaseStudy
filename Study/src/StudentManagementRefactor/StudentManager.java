@@ -78,10 +78,12 @@ public class StudentManager extends StudentDBIO{
     }
 
     @Override
-    public void deleteStudent(String sno) {
-        super.deleteStudent(sno);
-        studentList.remove(sno);
+    public HashMap<String, Student> deleteStudent(String sno) {
+        studentList.clear();
+        studentList = super.deleteStudent(sno);
         System.out.println(sno + "학생 데이터가 제거되었습니다.");
+
+        return null;
     }
 
     public void clearList(){

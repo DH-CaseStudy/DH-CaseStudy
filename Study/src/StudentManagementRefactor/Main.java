@@ -69,6 +69,7 @@ public class Main {
                     System.out.println("삭제 하고자 하는 학번을 입력하세요.");
                     String deletekey = Utility.readInput(String.class);
                     StudentDBIO.getInstance().deleteStudent(deletekey); //실제 DB에서 삭제
+                    StudentManager.getInstance().output();
                     break;
                 default :
                     System.out.println("잘못 입력 하셨습니다.");

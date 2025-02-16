@@ -69,23 +69,30 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
     }
 
     @Override
-    public void deleteStudent(String sno) {
+    public HashMap<String, Student> deleteStudent(String sno) {
         HashMap<String, Student> studentMap = parseJson();
 
         if (!studentMap.containsKey(sno)) {
             System.out.println("학번 '" + sno + "'에 해당하는 학생을 찾을 수 없습니다.");
-            return;
+            return studentMap; // 삭제하지 않고 기존 테이블 반환
         }
 
+        // 학생 삭제
         studentMap.remove(sno);
+
+        // 변경된 데이터 저장
         saveJson(studentMap);
+
         System.out.println("학번 '" + sno + "' 학생 정보가 삭제되었습니다.");
+
+        // 삭제된 후의 테이블 반환
+        return studentMap;
     }
+
 
     @Override
     public void output() {
-        HashMap<String, Student> studentMap = parseJson();
-        studentMap.values().forEach(System.out::println);
+
     }
 
     /**
@@ -169,7 +176,7 @@ public abstract class StudentDBIO extends ObjectIO implements StudentIO {
         List<Student> sortedList = new ArrayList<>(studentMap.values());
         sortedList.sort(comparator);
 
-        HashMap<String, Student> sortedMap = new LinkedHashMap<>();
+        HashMap<String, Student> sortedMap = new LinkedHashMap<>(); //순서를 보장하기 위해
         for (Student student : sortedList) {
             sortedMap.put(student.getSno(), student);
         }

@@ -1,5 +1,7 @@
 package StudentManagementRefactor;
 
+import java.util.HashMap;
+
 public interface DeleteStudent {
-    void deleteStudent(String sno);
+    HashMap<String, Student> deleteStudent(String sno);
 }
