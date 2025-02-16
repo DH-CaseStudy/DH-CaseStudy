@@ -2,49 +2,117 @@ package StudentManagementRefactor;
 
 import java.util.HashMap;
 
-public class StudentManager {
+/**
+ * 학생 관리 클래스.
+ * <p>
+ * 학생 데이터를 관리하며, 데이터 저장 및 조회, 정렬 등의 기능을 제공한다.
+ * 싱글턴 패턴을 사용하여 하나의 인스턴스만 유지한다.
+ * </p>
+ *
+ * @author 작성자명
+ * @version 1.0
+ * @since 2024-02-16
+ */
+public class StudentManager extends StudentDBIO{
+    /** StudentManager의 유일한 인스턴스 (싱글턴). */
     private static final StudentManager INSTANCE = new StudentManager();
-    private HashMap<String, Student> studentList = new HashMap<>();
-    private final StudentDBIO studentDBIO;// StudentDBIO를 직접 참조하지 않도록 변경
 
+    /** 학생 데이터를 저장하는 HashMap. */
+    private HashMap<String, Student> studentList = new HashMap<>();
+
+    /** 학생 데이터를 저장하고 불러오는 StudentDBIO 객체. */
+    private final StudentDBIO studentDBIO;
+
+    /**
+     * 생성자 - 싱글턴 패턴을 적용하여 외부에서 인스턴스 생성 방지.
+     */
     private StudentManager() {
-        this.studentDBIO = StudentDBIO.getInstance(); // ✅ 생성자에서 한 번만 초기화
+        this.studentDBIO = StudentDBIO.getInstance(); // 생성자에서 한 번만 초기화
     }
 
+    /**
+     * StudentManager의 유일한 인스턴스를 반환한다.
+     *
+     * @return StudentManager의 싱글턴 인스턴스
+     */
     public static StudentManager getInstance() {
         return INSTANCE;
     }
 
-    public void setStudentList(HashMap<String, Student> studentList) {
-        this.studentList.clear();
-        this.studentList.putAll(studentList);
-    }
-
-    public void loadData() {
+    /**
+     * 데이터베이스에서 학생 데이터를 로드한다.
+     *
+     * @return
+     */
+    @Override
+    public HashMap<String, Student> loadData() {
         studentList = studentDBIO.loadData();
+        return null;
     }
 
+    /**
+     * 학번을 이용하여 학생을 검색한다.
+     *
+     * @param sno 검색할 학생의 학번
+     * @return 학번에 해당하는 학생 객체 (없으면 null 반환)
+     */
+    @Override
     public Student search(String sno) {
-        return studentDBIO.search(sno); // 검색은 DB에서 처리하도록 변경
+        printStudent(studentDBIO.search(sno));
+        return null;
     }
 
-    public void sortByTotal() {
+    /**
+     * 총점 기준으로 학생 목록을 정렬한다.
+     *
+     * @return
+     */
+    @Override
+    public HashMap<String, Student> sortByTotal() {
         studentList = studentDBIO.sortByTotal();
+        return null;
     }
 
-    public void sortByName() {
+    /**
+     * 이름 기준으로 학생 목록을 정렬한다.
+     *
+     * @return
+     */
+    @Override
+    public HashMap<String, Student> sortByName() {
         studentList = studentDBIO.sortByName();
+        return null;
     }
 
+    /**
+     * 새로운 학생 정보를 추가한다.
+     * 데이터는 데이터베이스에도 저장된다.
+     *
+     * @param student 추가할 학생 객체
+     */
+    @Override
     public void input(Student student) {
-        studentDBIO.input(student); // 데이터를 DB에 저장하도록 변경
-        studentList.put(student.getSno(), student); // 내부 리스트도 업데이트
+        studentDBIO.input(student);
+        studentList.put(student.getSno(), student);
     }
 
-    public void deleteStudent(String sno) {
-        studentList = studentDBIO.deleteStudent(sno); // DB에서 삭제 후 최신 리스트 반영
+    /**
+     * 학번을 이용하여 학생을 삭제한다.
+     * 삭제 후 최신 학생 목록을 반영한다.
+     *
+     * @param sno 삭제할 학생의 학번
+     * @return
+     */
+    @Override
+    public HashMap<String, Student> deleteStudent(String sno) {
+        studentList = studentDBIO.deleteStudent(sno);
+        return null;
     }
 
+    /**
+     * 저장된 학생 데이터를 출력한다.
+     */
+    @Override
     public void output() {
         if (studentList.isEmpty()) {
             System.out.println("학생 데이터가 없습니다.");
@@ -55,4 +123,19 @@ public class StudentManager {
             }
         }
     }
+
+    /**
+     * 특정 학생 객체를 출력하는 메서드.
+     *
+     * @param student 출력할 학생 객체
+     */
+    public void printStudent(Student student) {
+        if (student == null) {
+            System.out.println("학생 정보를 찾을 수 없습니다.");
+            return;
+        }
+        System.out.println(Student.getTableHeader());
+        System.out.println(student);
+    }
+
 }
