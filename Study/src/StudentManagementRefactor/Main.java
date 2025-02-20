@@ -24,8 +24,7 @@ public class Main {
      * @throws IOException 데이터 로딩 중 발생할 수 있는 예외
      */
     public static void main(String[] args) throws IOException {
-        StudentManager studentManager = StudentManager.getInstance();
-        studentManager.loadData();
+        StudentManager.getInstance().loadData();
 
         while (true) {
             System.out.println("학생정보 조회 시스템 입니다.");
@@ -47,35 +46,35 @@ public class Main {
                     String grade = calculateGrade(average);
 
                     Student student = new Student(sno, name, korean, english, math, science, total, average, grade);
-                    studentManager.input(student); // JSON 파일에 데이터 입력
+                    StudentManager.getInstance().input(student); // JSON 파일에 데이터 입력
                     break;
 
                 case 2: // 전체 테이블 조회
-                    studentManager.loadData();
-                    studentManager.output();
+                    StudentManager.getInstance().loadData();
+                    StudentManager.getInstance().output();
                     break;
 
                 case 3: // 특정 학생 조회
                     System.out.println("조회하고자 하는 학번을 입력하세요.");
                     String searchKey = getValidatedStudentNumber();
-                    studentManager.search(searchKey);
+                    StudentManager.getInstance().search(searchKey);
                     break;
 
                 case 4: // 이름 기준 정렬
-                    studentManager.sortByName();
-                    studentManager.output();
+                    StudentManager.getInstance().sortByName();
+                    StudentManager.getInstance().output();
                     break;
 
                 case 5: // 성적 기준 정렬
-                    studentManager.sortByTotal();
-                    studentManager.output();
+                    StudentManager.getInstance().sortByTotal();
+                    StudentManager.getInstance().output();
                     break;
 
                 case 6: // 특정 학생 삭제 후 최신 테이블 반환
                     System.out.println("삭제하고자 하는 학번을 입력하세요.");
                     String deleteKey = getValidatedStudentNumber();
-                    studentManager.deleteStudent(deleteKey);
-                    studentManager.output();
+                    StudentManager.getInstance().deleteStudent(deleteKey);
+                    StudentManager.getInstance().output();
                     break;
 
                 default:

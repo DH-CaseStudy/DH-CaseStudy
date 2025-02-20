@@ -43,20 +43,17 @@ public class StudentManager {
      * 데이터베이스에서 학생 데이터를 로드한다.
      *
      */
-    public HashMap<String, Student> loadData() {
+    public void loadData() {
         studentList = studentDBIO.loadData();
-        return null;
     }
 
     /**
      * 학번을 이용하여 학생을 검색한다.
      *
      * @param sno 검색할 학생의 학번
-     * @return 학번에 해당하는 학생 객체 (없으면 null 반환)
      */
-    public Student search(String sno) {
+    public void search(String sno) {
         printStudent(studentDBIO.search(sno));
-        return null;
     }
 
     /**
