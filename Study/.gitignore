@@ -1,72 +1,29 @@
-# 🛠 기본적인 OS 관련 파일
-.DS_Store
-Thumbs.db
-
-# 🛠 IDE 관련 파일 (IntelliJ, Eclipse, VS Code 등)
-.idea/
-.vscode/
-*.iml
-*.ipr
-*.iws
-.classpath
-.project
-.settings/
-
-# 🛠 빌드 출력물
-bin/
+### IntelliJ IDEA ###
 out/
-target/
-build/
-*.class
-*.jar
-*.war
-*.ear
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-# 🛠 Maven 관련
-.mvn/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.next
-release.properties
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
-# 🛠 Gradle 관련
-.gradle/
-build/
-!gradle-wrapper.jar
-gradle-app.setting
-gradle.log
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# 🛠 Node.js 관련 (프론트엔드 포함 프로젝트)
-node_modules/
-npm-debug.log
-yarn-error.log
-.pnp/
-.pnp.js
+### VS Code ###
+.vscode/
 
-# 🛠 로그 및 캐시 파일
-*.log
-*.tmp
-*.swp
-*.swo
-*.swn
-
-# 🛠 환경 변수 및 보안 관련 파일
-.env
-.env.local
-.env.*.local
-*.key
-*.pem
-*.crt
-*.p12
-*.jks
-secrets/
-
-# 🛠 Lombok 캐시 파일
-.lombok/
-
-# 🛠 IntelliJ 및 Eclipse의 자동 빌드 파일
-*.factorypath
-
-# 🛠 JetBrains Rider 관련
-.idea/
-*.sln.iml
+### Mac OS ###
+.DS_Store
