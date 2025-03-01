@@ -80,7 +80,8 @@ public class StudentManager {
      */
     public void input(Student student) {
         studentDBIO.input(student);
-        studentList.put(student.getSno(), student);
+        studentList = studentDBIO.loadData();
+        //studentList.put(student.getSno(), student); //사실 이부분은 리팩토링 해야됨 json을 로드해야됨 데이터 이원화 가능성이 여전히 있음.
     }
 
     /**

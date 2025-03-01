@@ -154,4 +154,18 @@ public class Main {
         if (average >= 60) return "D";
         return "F";
     }
+
+//    public Employee createEmployee(String eno, String name, int entryYear, int entryMonth, int entryDay, String role, String secno) {
+//        switch (role) {
+//            case "Manager":
+//                return new Manager(eno, name, entryYear, entryMonth, entryDay, secno);
+//            case "Secretary":
+//                return new Secretary(eno, name, entryYear, entryMonth, entryDay, null);
+//            case "Staff":
+//                return new Staff(eno, name, entryYear, entryMonth, entryDay, null);
+//            default:
+//                System.out.println("Invalid role");
+//                return null;
+//        }
+//    }
 }

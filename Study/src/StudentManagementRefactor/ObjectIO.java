@@ -25,5 +25,5 @@ public abstract class ObjectIO {
      * @return json파일로부터 불러온 테이블의 데이터를 반환한다.
      */
     abstract HashMap<String, Student> loadData() throws IOException;
-
+        // loadData가 Employee 까지 사용 가능 한 형태여야함.
 }
