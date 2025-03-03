@@ -1,6 +1,6 @@
 package Board;
 
-import StudentManagementRefactor.Utility;
+import MainSystem.student.Utility;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
