@@ -20,5 +20,5 @@ public abstract class ObjectIO<K, V> {
     public abstract Map<K, V> loadData() throws IOException;
 
     // 기존에는 saveData() 메서드가 없었으므로, JSON 저장 기능을 추가했습니다.
-    //public abstract void saveData(Map<K, V> data) throws IOException;
+    public abstract void saveData(Map<K, V> data) throws IOException;
 }

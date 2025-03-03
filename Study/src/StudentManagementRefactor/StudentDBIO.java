@@ -62,6 +62,11 @@ public class StudentDBIO extends ObjectIO implements StudentIO {
         return parseJson();
     }
 
+    @Override
+    public void saveData(Map data) throws IOException {
+        //
+    }
+
     /**
      * 새로운 학생 데이터를 JSON 파일에 추가한다.
      *
