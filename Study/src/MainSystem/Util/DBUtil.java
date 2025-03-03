@@ -16,7 +16,7 @@ public class DBUtil {
             if (getConnection == null || getConnection.isClosed()) {
                 Class.forName("com.mysql.cj.jdbc.Driver"); // JDBC 드라이버 로드
                 getConnection = DriverManager.getConnection(url, user, password);
-                System.out.println("데이터베이스 연결 성공!");
+                //System.out.println("데이터베이스 연결 성공!");
             }
 
         } catch (ClassNotFoundException e) {

@@ -49,6 +49,7 @@ public class EmployeeDBIO extends ObjectIO implements EmployeeIO {
             e.printStackTrace();
         }
 
+        DBUtil.getConnection();
         return false;
     }
 
@@ -96,6 +97,7 @@ public class EmployeeDBIO extends ObjectIO implements EmployeeIO {
             e.printStackTrace();
         }
 
+        DBUtil.getConnection();
         return null; // 직원이 존재하지 않는 경우
     }
 
@@ -129,6 +131,7 @@ public class EmployeeDBIO extends ObjectIO implements EmployeeIO {
             e.printStackTrace();
         }
 
+        DBUtil.getConnection();
         return employees;
     }
 
@@ -160,6 +163,7 @@ public class EmployeeDBIO extends ObjectIO implements EmployeeIO {
             e.printStackTrace();
         }
 
+        DBUtil.getConnection();
         return employees;
     }
 
@@ -191,6 +195,7 @@ public class EmployeeDBIO extends ObjectIO implements EmployeeIO {
             e.printStackTrace();
         }
 
+        DBUtil.getConnection();
         return employees;
     }
 
