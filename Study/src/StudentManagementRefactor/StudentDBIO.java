@@ -58,7 +58,7 @@ public class StudentDBIO extends ObjectIO implements StudentIO {
      * @return 학생 데이터가 저장된 HashMap
      */
     @Override
-    public HashMap<String, Student> loadData() {
+    public Map<String, Student> loadData() {
         return parseJson();
     }
 

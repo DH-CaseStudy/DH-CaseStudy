@@ -1,6 +1,8 @@
 package StudentManagementRefactor;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 학생 데이터 관리 클래스.
@@ -18,7 +20,7 @@ public class StudentManager {
     private static final StudentManager INSTANCE = new StudentManager();
 
     /** 학생 데이터를 저장하는 HashMap. */
-    private HashMap<String, Student> studentList = new HashMap<>();
+    private Map<String, Student> studentList = new LinkedHashMap<>();
 
     /** 학생 데이터를 저장하고 불러오는 StudentDBIO 객체. */
     private final StudentDBIO studentDBIO;
