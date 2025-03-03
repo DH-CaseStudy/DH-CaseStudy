@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
-    private static final String url = "jdbc:mysql://127.0.0.1:3306/ssg?serverTimezone=Asia/Seoul";
+    private static final String url = "jdbc:mysql://127.0.0.1:3306/employeemanagement?serverTimezone=Asia/Seoul";
     private static final String user = "root";
     private static final String password = "3546";
 

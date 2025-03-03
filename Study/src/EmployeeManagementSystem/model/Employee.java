@@ -12,4 +12,15 @@ public class Employee {
     private String role;
     private String secno;
     private int salary;
+
+    public Employee(String eno, String name, int enterYear, int enterMonth, int enterDay, String role, String secno, int salary) {
+        this.eno = eno;
+        this.name = name;
+        this.enterYear = enterYear;
+        this.enterMonth = enterMonth;
+        this.enterDay = enterDay;
+        this.role = role;
+        this.secno = secno;
+        this.salary = salary;
+    }
 }
