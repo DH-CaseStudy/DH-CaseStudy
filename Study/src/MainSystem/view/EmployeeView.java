@@ -10,7 +10,7 @@ public class EmployeeView {
             System.out.println("해당 직원 정보를 찾을 수 없습니다.");
             return;
         }
-        System.out.println("\n=== 직원 정보 ===");
+        System.out.println("\n=== 직원 정보 =============================");
         System.out.println("ID        : " + employee.getEno());
         System.out.println("이름      : " + employee.getName());
         System.out.println("입사 연도 : " + employee.getEnterYear());
@@ -19,7 +19,7 @@ public class EmployeeView {
         System.out.println("직급      : " + employee.getRole());
         System.out.println("비서 번호 : " + (employee.getSecno() != null ? employee.getSecno() : "없음"));
         System.out.println("급여      : " + employee.getSalary() + " 원");
-        System.out.println("==================\n");
+        System.out.println("==========================================\n");
     }
 
     // 직원 목록 출력
@@ -28,14 +28,21 @@ public class EmployeeView {
             System.out.println("직원 목록이 없습니다.");
             return;
         }
-        System.out.println("\n=== 직원 목록 ===");
-        for (Employee e : employees) {
-            System.out.println(e.getEno() + " | " + e.getName() + " | " + e.getEnterYear() + "-" + e.getEnterMonth() + "-" + e.getEnterDay() +
-                    " | " + e.getRole() + " | 비서번호: " + (e.getSecno() != null ? e.getSecno() : "없음") + " | " + e.getSalary() + " 원");
-        }
-        System.out.println("==================\n");
-    }
 
+        // 컬럼 헤더 출력
+        System.out.println("\n=== 직원 목록 ===");
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.printf("%-10s | %-10s | %-10s | %-10s | %-10s | %-10s\n", "사번", "이름", "입사일", "직급", "비서번호", "월급");
+        System.out.println("--------------------------------------------------------------------------------");
+
+        // 직원 정보 출력
+        for (Employee e : employees) {
+            System.out.printf("%-10s | %-10s | %4d-%02d-%02d | %-10s | %-10s | %,10d 원\n",
+                    e.getEno(), e.getName(), e.getEnterYear(), e.getEnterMonth(), e.getEnterDay(),
+                    e.getRole(), (e.getSecno() != null ? e.getSecno() : "없음"), e.getSalary());
+        }
+        System.out.println("================================================================================\n");
+    }
 
     // 메시지 출력
     public void displayMessage(String message) {

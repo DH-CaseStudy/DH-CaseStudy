@@ -64,11 +64,11 @@ public class Main {
                     String name = getValidatedName();
 
                     System.out.println("입사년도를 입력하세요.");
-                    int enterYear = Utility.readInput(Integer.class);
+                    int enterYear = getValidateEnterYear();
                     System.out.println("입사월을 입력하세요.");
-                    int enterMonth = Utility.readInput(Integer.class);
+                    int enterMonth = getValidateEnterMonth();
                     System.out.println("입사일을 입력하세요.");
-                    int enterDay = Utility.readInput(Integer.class);
+                    int enterDay = getValidateEnterDay(enterYear, enterMonth);
                     System.out.println("월급을 입력하세요.");
                     int salary = Utility.readInput(Integer.class);
 
@@ -211,6 +211,60 @@ public class Main {
             System.out.println("반드시 5자리 숫자로 입력해야 합니다. 다시 입력하세요.");
         }
     }
+
+    private static int getValidateEnterYear() {
+        System.out.println("1950년 부터 2025 년 까지 입력 가능합니다.");
+        while (true) {
+            String input = Utility.readInput(String.class);
+            if (input.matches("\\d{4}")) {
+                int year = Integer.parseInt(input);
+                if (year >= 1950 && year <= 2025) { // 현실적인 범위 체크
+                    return year;
+                }
+            }
+            System.out.println("올바른 연도를 입력하세요. 예: 2020");
+        }
+    }
+
+    public static int getValidateEnterMonth() {
+        System.out.println("1부터 12까지 입력 가능합니다.");
+        while (true) {
+            String input = Utility.readInput(String.class);
+            if (input.matches("^(0?[1-9]|1[0-2])$")) { // 01~09 또는 1~12
+                int month = Integer.parseInt(input);
+                return month;
+            }
+            System.out.println("올바른 월을 입력하세요 (1~12)");
+        }
+    }
+
+    public static int getValidateEnterDay(int year, int month) {
+        while (true) {
+            String input = Utility.readInput(String.class);
+            if (input.matches("^0?[1-9]$|^[12][0-9]$|^3[01]$")) { // 01~09, 10~29, 30, 31 허용
+                int day = Integer.parseInt(input);
+                if (day <= getDaysInMonth(year, month)) {
+                    return day;
+                }
+            }
+            System.out.println("올바른 일을 입력하세요. (" + month + "월의 최대 일수: " + getDaysInMonth(year, month) + ")");
+        }
+    }
+
+    private static int getDaysInMonth(int year, int month) {
+        if (month == 2) { // 2월이면 윤년 체크
+            return isLeapYear(year) ? 29 : 28;
+        }
+        return switch (month) {
+            case 4, 6, 9, 11 -> 30; // 30일까지 있는 달 (4, 6, 9, 11월)
+            default -> 31; // 31일까지 있는 달 (1, 3, 5, 7, 8, 10, 12월)
+        };
+    }
+
+    private static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+
 
     private static int getValidatedScore(String subject) {
         System.out.println(subject + " 점수를 입력하세요 (0~100):");
