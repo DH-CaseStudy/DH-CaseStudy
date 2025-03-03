@@ -11,57 +11,52 @@ import MainSystem.view.EmployeeView;
 
 import java.io.IOException;
 
-/**
- * 학생 관리 시스템의 메인 클래스.
- * <p>
- * 학생 정보를 입력, 조회, 정렬(성적순,이름순 내림차순), 삭제하는 기능을 실행하며, 사용자 입력을 받아 처리한다.
- * </p>
- *
- * @author 이동휘
- * @version 1.0
- * @since 2024-02-16
- */
 public class Main {
 
-    /**
-     * 학생 관리 시스템의 진입점.
-     * <p>
-     * 사용자가 메뉴를 선택하여 학생 정보를 입력, 조회, 정렬(성적순,이름순 내림차순), 삭제할 수 있도록 한다.
-     * </p>
-     *
-     * @throws IOException 데이터 로딩 중 발생할 수 있는 예외
-     */
     public static void main(String[] args) throws IOException {
+        while (true) {
+            System.out.println("메인 시스템입니다.");
+            System.out.println("1. 직원 시스템");
+            System.out.println("2. 학생 시스템");
+            System.out.println("3. 시스템 종료");
+            System.out.print("원하는 번호를 입력하세요: ");
 
-        employeeSystem();
-
+            int mainChoice = Utility.readInput(Integer.class);
+            switch (mainChoice) {
+                case 1:
+                    employeeSystem();
+                    break;
+                case 2:
+                    studentSystem();
+                    break;
+                case 3:
+                    System.out.println("시스템을 종료합니다.");
+                    return; // 메인 메서드 종료 → 프로그램 종료
+                default:
+                    System.out.println("잘못 입력하셨습니다. 다시 선택하세요.");
+            }
+        }
     }
 
-    private static void employeeSystem(){
+    // 직원 시스템: 사용자가 "0"을 입력하면 해당 시스템 종료 후 메인 메뉴로 복귀
+    private static void employeeSystem() {
         EmployeeView view = new EmployeeView();
         EmployeeController controller = new EmployeeController(view);
 
-        //입력
-        //controller.addEmployee(new Staff("15232", "장항동", 2024, 3, 1, null, 1000000));
-//        controller.addEmployee(new Manager("21234", "삼성동", 2012, 12, 6, "52231", 9999999));
-//        controller.addEmployee(new Secretary("52231", "성사동", 2013, 5, 4, null, 32100000));
-
-        //단일 테이블 데이터 출력
-        //controller.getEmployeeById("15232");
-
-        //controller.listAllEmployees();
-//        controller.searchEmployeeByName("장항동");
-//        controller.searchEmployeesByRole("Manager");
-
-        while(true) {
-            System.out.println("직원 시스템 입니다.");
-            System.out.println("1.입력 2.전체조회 3.사번으로 조회 4.이름으로 조회 5.직군별 검색 중 원하는 번호를 입력하세요.");
+        while (true) {
+            System.out.println("\n--- 직원 시스템 ---");
+            System.out.println("1. 입력");
+            System.out.println("2. 전체 조회");
+            System.out.println("3. 사번으로 조회");
+            System.out.println("4. 이름으로 조회");
+            System.out.println("5. 직군별 검색");
+            System.out.println("0. 직원 시스템 종료");
+            System.out.print("원하는 번호를 입력하세요: ");
 
             int input = Utility.readInput(Integer.class);
 
             switch (input) {
                 case 1: // 직원 입력
-
                     System.out.println("직원 번호를 입력하세요.");
                     String eno = getValidatedNumber();
 
@@ -74,49 +69,47 @@ public class Main {
                     int enterMonth = Utility.readInput(Integer.class);
                     System.out.println("입사일을 입력하세요.");
                     int enterDay = Utility.readInput(Integer.class);
-                    System.out.println("월급 입력하세요.");
+                    System.out.println("월급을 입력하세요.");
                     int salary = Utility.readInput(Integer.class);
 
                     System.out.println("직군을 선택하세요");
-                    System.out.println("1.직원, 2.임원, 3.비서 중 ");
+                    System.out.println("1. 직원, 2. 임원, 3. 비서");
                     int role = Utility.readInput(Integer.class);
 
                     switch (role) {
-                        case 1: controller.addEmployee(new Staff(eno, name, enterYear, enterMonth, enterDay, salary));
+                        case 1:
+                            controller.addEmployee(new Staff(eno, name, enterYear, enterMonth, enterDay, salary));
                             break;
                         case 2:
                             System.out.println("비서의 직원 번호를 입력하세요.");
                             String secno = Utility.readInput(String.class);
                             controller.addEmployee(new Manager(eno, name, enterYear, enterMonth, enterDay, secno, salary));
                             break;
-                        case 3: controller.addEmployee(new Secretary(eno, name, enterYear, enterMonth, enterDay, salary));
+                        case 3:
+                            controller.addEmployee(new Secretary(eno, name, enterYear, enterMonth, enterDay, salary));
                             break;
-                        default: break;
+                        default:
+                            System.out.println("잘못 선택하셨습니다.");
+                            break;
                     }
-
                     break;
-
-                case 2: // 전체 테이블 조회
-                        controller.listAllEmployees();
+                case 2: // 전체 조회
+                    controller.listAllEmployees();
                     break;
-
-                case 3: // 특정 사원 조회
+                case 3: // 사번으로 조회
                     System.out.println("조회하고자 하는 사번을 입력하세요.");
                     String employeeNum = Utility.readInput(String.class);
-                        controller.getEmployeeById(employeeNum);
+                    controller.getEmployeeById(employeeNum);
                     break;
-
-                case 4: // 이름 기준 정렬
-                    System.out.println("조회하고자 하는 사원의 이름을 입력하세요.");
+                case 4: // 이름으로 조회
+                    System.out.println("조회하고자 하는 직원의 이름을 입력하세요.");
                     String employeeName = Utility.readInput(String.class);
                     controller.searchEmployeeByName(employeeName);
                     break;
-
-                case 5: // 성적 기준 정렬
-                    System.out.println("조회하고자 직군을 선택하세요.");
-                    System.out.println("1.직원, 2.임원, 3.비서 ");
+                case 5: // 직군별 검색
+                    System.out.println("조회하고자 하는 직군을 선택하세요.");
+                    System.out.println("1. 직원, 2. 임원, 3. 비서");
                     String employeeRole = Utility.readInput(String.class);
-
                     switch (employeeRole) {
                         case "1":
                             controller.searchEmployeesByRole("Staff");
@@ -127,30 +120,34 @@ public class Main {
                         case "3":
                             controller.searchEmployeesByRole("Secretary");
                             break;
+                        default:
+                            System.out.println("잘못 입력하셨습니다.");
                     }
-
                     break;
-
-                case 6: // 특정 학생 삭제 후 최신 테이블 반환
-                    System.out.println("삭제하고자 하는 학번을 입력하세요.");
-                    String deleteKey = getValidatedNumber();
-                    StudentManager.getInstance().deleteStudent(deleteKey);
-                    StudentManager.getInstance().output();
-                    break;
-
+                case 0: // 직원 시스템 종료 후 메인 메뉴로 복귀
+                    System.out.println("직원 시스템을 종료합니다.");
+                    return;
                 default:
                     System.out.println("잘못 입력하셨습니다.");
             }
         }
-
     }
 
-    private static void studentSystem(){
+    // 학생 시스템: 사용자가 "0"을 입력하면 해당 시스템 종료 후 메인 메뉴로 복귀
+    private static void studentSystem() {
         StudentManager.getInstance().loadData();
 
         while (true) {
-            System.out.println("학생관리 시스템 입니다.");
-            System.out.println("1.입력 2.전체조회 3.학번으로 조회 4.정렬(이름 순) 5.정렬(성적 순) 6.삭제 중 원하는 번호를 입력하세요.");
+            System.out.println("\n--- 학생 시스템 ---");
+            System.out.println("1. 입력");
+            System.out.println("2. 전체 조회");
+            System.out.println("3. 학번으로 조회");
+            System.out.println("4. 정렬(이름 순)");
+            System.out.println("5. 정렬(성적 순)");
+            System.out.println("6. 삭제");
+            System.out.println("0. 학생 시스템 종료");
+            System.out.print("원하는 번호를 입력하세요: ");
+
             int input = Utility.readInput(Integer.class);
 
             switch (input) {
@@ -170,49 +167,40 @@ public class Main {
                     Student student = new Student(sno, name, korean, english, math, science, total, average, grade);
                     StudentManager.getInstance().input(student); // JSON 파일에 데이터 입력
                     break;
-
-                case 2: // 전체 테이블 조회
+                case 2: // 전체 조회
                     StudentManager.getInstance().loadData();
                     StudentManager.getInstance().output();
                     break;
-
                 case 3: // 특정 학생 조회
                     System.out.println("조회하고자 하는 학번을 입력하세요.");
                     String searchKey = getValidatedNumber();
                     StudentManager.getInstance().search(searchKey);
                     break;
-
                 case 4: // 이름 기준 정렬
                     StudentManager.getInstance().sortByName();
                     StudentManager.getInstance().output();
                     break;
-
                 case 5: // 성적 기준 정렬
                     StudentManager.getInstance().sortByTotal();
                     StudentManager.getInstance().output();
                     break;
-
-                case 6: // 특정 학생 삭제 후 최신 테이블 반환
+                case 6: // 학생 삭제
                     System.out.println("삭제하고자 하는 학번을 입력하세요.");
                     String deleteKey = getValidatedNumber();
                     StudentManager.getInstance().deleteStudent(deleteKey);
                     StudentManager.getInstance().output();
                     break;
-
+                case 0: // 학생 시스템 종료 후 메인 메뉴로 복귀
+                    System.out.println("학생 시스템을 종료합니다.");
+                    return;
                 default:
                     System.out.println("잘못 입력하셨습니다.");
             }
         }
     }
 
-    /**
-     * 학번 입력을 검증하는 메서드.
-     * <p>
-     * 학번은 반드시 5자리 숫자로 입력해야 한다.
-     * </p>
-     *
-     * @return 유효한 학번 (5자리 숫자)
-     */
+    // 아래는 입력값 검증을 위한 보조 메서드들
+
     private static String getValidatedNumber() {
         System.out.println("5자리 숫자를 입력하세요.");
         while (true) {
@@ -224,15 +212,6 @@ public class Main {
         }
     }
 
-    /**
-     * 특정 과목의 점수를 입력받고 검증하는 메서드.
-     * <p>
-     * 점수는 반드시 0~100 사이의 정수여야 한다.
-     * </p>
-     *
-     * @param subject 입력할 과목명 (예: 국어, 영어, 수학, 과학)
-     * @return 유효한 점수 (0~100 범위의 정수)
-     */
     private static int getValidatedScore(String subject) {
         System.out.println(subject + " 점수를 입력하세요 (0~100):");
         while (true) {
@@ -244,31 +223,17 @@ public class Main {
         }
     }
 
-    /**
-     * 한글 이름 입력을 검증하는 메서드.
-     * <p>
-     * 이름은 반드시 한글만 포함해야 하며, 영어 및 숫자는 입력할 수 없다.
-     * </p>
-     *
-     * @return 유효한 한글 이름
-     */
     private static String getValidatedName() {
         System.out.println("이름을 입력하세요 (한글만 가능):");
         while (true) {
             String name = Utility.readInput(String.class);
-            if (name.matches("[가-힣]+")) {  // 한글만 허용
+            if (name.matches("[가-힣]+")) {
                 return name;
             }
             System.out.println("이름은 한글만 입력해야 합니다. 다시 입력하세요.");
         }
     }
 
-    /**
-     * 평균 점수를 기준으로 학점을 계산하는 메서드.
-     *
-     * @param average 학생의 평균 점수
-     * @return 학점 (A, B, C, D, F)
-     */
     private static String calculateGrade(double average) {
         if (average >= 90) return "A";
         if (average >= 80) return "B";
