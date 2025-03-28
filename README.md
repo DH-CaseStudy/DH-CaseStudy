@@ -29,7 +29,7 @@
 ### 📌 Projects
 
 [Backend]
-- 🧾 [창고관리 시스템]([https://github.com/yourproject2](https://github.com/DH-CaseStudy/Buildify_Phase-1))  
+- 🧾 [창고관리 시스템](https://github.com/DH-CaseStudy/Buildify_Phase-1)
   Java + MySQL 기반 창고관리 시스템 (학습용)
   
 [Unity]
