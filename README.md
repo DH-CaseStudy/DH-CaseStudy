@@ -39,6 +39,7 @@
 - 🐾 [O모O모](https://www.fortunekorea.co.kr/news/articleView.html?idxno=25188)
 -  프로젝트 기간(2022.04 ~ 2024.04) 
 -  주요 기능 개발, 프로젝트 일정 관리, 고객사 커뮤니케이션 (삼성화재 납품)
+-  iOS 누적 다운로드 11만6천, Android 누적 다운로드 69만
   
 [Unity]
 - 🕶️ [VR SQUARE](https://www.meta.com/ko-kr/experiences/vr-square-5g-lab/2898438393596104/?srsltid=AfmBOopgRdAc8ZN_kEqyBSUjpweb88zTWmtJFwxQ169Hy2jXBnqK5Dbx)
