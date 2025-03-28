@@ -51,10 +51,6 @@ https://grey-shield-2af.notion.site/1c477562966580f1afb7c268ba85a8c1
 ---
 
 ### 📈 GitHub Stats
-<p align="left">
-  <img src="https://github-readme-stats.vercel.app/api?username=DH-CaseStudy&show_icons=true&theme=default" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DH-CaseStudy&layout=compact&theme=default" />
-</p>
 
 ---
 
