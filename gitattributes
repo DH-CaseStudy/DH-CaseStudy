@@ -1,0 +1,7 @@
+# Exclude HTML and CSS from GitHub linguist language stats
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+
+# Optionally exclude entire directories commonly used for static assets
+/public/* linguist-detectable=false
+/resources/* linguist-detectable=false
