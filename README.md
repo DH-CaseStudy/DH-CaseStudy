@@ -28,8 +28,9 @@
 
 ### 📌 Projects
 
-[Backend]
+[Backend] 
 - 🧾 [창고관리 시스템](https://github.com/DH-CaseStudy/Buildify_Phase-1)
+- 프로젝트 기간 (2025.03 ~ 현재)
 - Java + MySQL 기반 창고관리 시스템 (학습용)
   
 [Unity]
