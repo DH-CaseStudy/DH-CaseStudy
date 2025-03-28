@@ -30,7 +30,7 @@
 
 [Backend]
 - 🧾 [창고관리 시스템](https://github.com/DH-CaseStudy/Buildify_Phase-1)
-  Java + MySQL 기반 창고관리 시스템 (학습용)
+- Java + MySQL 기반 창고관리 시스템 (학습용)
   
 [Unity]
 - 🐾 [O모O모](https://www.fortunekorea.co.kr/news/articleView.html?idxno=25188)
