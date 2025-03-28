@@ -9,7 +9,8 @@
 
 ### 👨‍💻 About Me
 - 🧠 유니티 앱 개발자에서 현재는 **백엔드 개발자**로 직무 전환 중  
-- 🎯 관심 분야: Java, MySQL, MyBatis, JPA
+- 🎯 관심 기술: Java, MySQL, MyBatis, JPA, Spring, Srping Boot, Docker, MSA
+- 🔍 관심 분야: 📦 물류 시스템, 🏭 산업 자동화, 🤖 AI 기반 서비스  
 - 📚 부트캠프 수강 중 + 팀 프로젝트로 역량 키우는 중  
 - ✍️ 현재 포트폴리오 및 코딩테스트 준비 병행
 
