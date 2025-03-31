@@ -33,17 +33,22 @@
 [Backend] 
 - 🧾 [창고관리 시스템](https://github.com/DH-CaseStudy/Buildify_Phase-1)
 - 프로젝트 기간 (2025.03 ~ 현재)
+- 프로제트 인원 ()
+- 담당 역할: 
 - Java + MySQL 기반 창고관리 시스템 (학습용)
   
 [Unity]
 - 🐾 [O모O모](https://www.fortunekorea.co.kr/news/articleView.html?idxno=25188)
--  프로젝트 기간(2022.04 ~ 2024.04) 
--  주요 기능 개발, 프로젝트 일정 관리, 고객사 커뮤니케이션 (삼성화재 납품)
+-  프로젝트 기간(2022.04 ~ 2024.04)
+-  프로젝트 인원 ( )
+-  담당 역할 : 주요 기능 개발(?, ?,? ?), 프로젝트 일정 관리, 고객사 커뮤니케이션 (삼성화재 납품)
 -  iOS 누적 다운로드 11만6천, Android 누적 다운로드 69만
   
 [Unity]
 - 🕶️ [VR SQUARE](https://www.meta.com/ko-kr/experiences/vr-square-5g-lab/2898438393596104/?srsltid=AfmBOopgRdAc8ZN_kEqyBSUjpweb88zTWmtJFwxQ169Hy2jXBnqK5Dbx)
 - 프로젝트 기간 (2019.09 ~ 2022.12)
+- 프로젝트 인원 ( )
+- 담당역할 : 주요 기능 개발(?, ?, ?, ?)
 - 소프트뱅크 5G LAB 서비스 중 하나로 선정 (소프트뱅크 납품)
 
 ---
@@ -56,7 +61,6 @@ https://grey-shield-2af.notion.site/1c477562966580f1afb7c268ba85a8c1
 ### 📈 GitHub Stats
 <p align="left">
   <img src="https://github-readme-stats.vercel.app/api?username=DH-CaseStudy&show_icons=true&theme=default" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DH-CaseStudy&layout=compact&theme=default" />
 </p>
 ---
 
