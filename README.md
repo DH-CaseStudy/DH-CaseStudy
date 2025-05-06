@@ -16,12 +16,59 @@
 ---
 
 ### 🛠️ Tech Stack
+
+#### 💻 Programming Language
 <p align="left">
   <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white"/>
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
   <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Unity-000000?style=flat-square&logo=unity&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/>
 </p>
+
+#### 📚 Framework / Library
+<p align="left">
+  <img src="https://img.shields.io/badge/Spring%205-6DB33F?style=flat-square&logo=spring&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JSP-007396?style=flat-square"/>
+  <img src="https://img.shields.io/badge/MyBatis-59666C?style=flat-square"/>
+</p>
+
+#### 🖥️ Server
+<p align="left">
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Tomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=black"/>
+</p>
+
+#### 🌐 Environment
+<p align="left">
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black"/>
+  <img src="https://img.shields.io/badge/AWS(S3,%20RDS)-232F3E?style=flat-square&logo=amazonaws&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Unity-000000?style=flat-square&logo=unity&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Xcode-147EFB?style=flat-square&logo=xcode&logoColor=white"/>
+  <img src="https://img.shields.io/badge/IntelliJIDEA-000000?style=flat-square&logo=intellijidea&logoColor=white"/>
+</p>
+
+#### ✅ Testing / Deployment
+<p align="left">
+  <img src="https://img.shields.io/badge/SonarQube-4E9BCD?style=flat-square&logo=sonarqube&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TestFlight-0D96F6?style=flat-square&logo=testflight&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AppStoreConnect-0D96F6?style=flat-square"/>
+  <img src="https://img.shields.io/badge/GooglePlayConsole-34A853?style=flat-square&logo=googleplay&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AppCenter-3E4E88?style=flat-square&logo=appcenter&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MetaQuestStore-FF5A5F?style=flat-square"/>
+</p>
+
+#### 🧩 Etc
+<p align="left">
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GitLab-FC6D26?style=flat-square&logo=gitlab&logoColor=white"/>
+  <img src="https://img.shields.io/badge/SVN-809CC9?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=jira&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Confluence-172B4D?style=flat-square&logo=confluence&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Slack-4A154B?style=flat-square&logo=slack&logoColor=white"/>
+</p>
+
 
 ---
 
