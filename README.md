@@ -88,14 +88,8 @@
 ---
 
 ### 📌 Portfolio
-[Notion Portfolio 바로가기](https://grey-shield-2af.notion.site/1c477562966580f1afb7c268ba85a8c1)
+[Notion Portfolio 바로가기](https://www.notion.so/1e8775629665808bb093e077a58ebd42#1eb77562966580db8bbaeb338ea9d3eb)
 
----
-
-### 📈 GitHub Stats
-<p align="left">
-  <img src="https://github-readme-stats.vercel.app/api?username=DH-CaseStudy&show_icons=true&theme=default" />
-</p>
 
 ---
 
