@@ -1,5 +1,5 @@
 <h1 align="center">안녕하세요 👋, 이동휘 입니다. </h1>
-<h3 align="center">앱 개발자로 시작한 백엔드 개발자</h3>
+<h3 align="center">제목 수정</h3>
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=DH-CaseStudy&label=Profile%20views&color=0e75b6&style=flat" alt="profile views" />
