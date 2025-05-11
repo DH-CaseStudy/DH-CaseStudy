@@ -8,7 +8,7 @@
 ---
 
 ### 👨‍💻 About Me
-- 🧠 유니티 앱 개발자에서 현재는 **백엔드 개발자**로 직무 전환 중  
+- 🧠 유니티 앱 개발자에서 현재는 **백엔드 개발자**로 역량 확장 중 입니다.
 - 🎯 관심 기술: Java, MySQL, MyBatis, JPA, Spring, Spring Boot, Docker, MSA
 - 🔍 관심 분야: 📦 물류 시스템, 🏭 산업 자동화, 🤖 AI 기반 서비스  
 - 📚 부트캠프 수강 중 + 팀 프로젝트로 역량 키우는 중  
@@ -135,7 +135,7 @@
 ---
 
 ### 📌 Portfolio [url 수정 필요]
-[Notion Portfolio 바로가기](https://www.notion.so/1e8775629665808bb093e077a58ebd42#1eb77562966580db8bbaeb338ea9d3eb)
+[Notion Portfolio 바로가기](https://grey-shield-2af.notion.site/1ef77562966580199b6ef942ab7771a4)
 
 
 ---
