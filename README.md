@@ -134,7 +134,7 @@
 
 ---
 
-### 📌 Portfolio
+### 📌 Portfolio [url 수정 필요]
 [Notion Portfolio 바로가기](https://www.notion.so/1e8775629665808bb093e077a58ebd42#1eb77562966580db8bbaeb338ea9d3eb)
 
 
