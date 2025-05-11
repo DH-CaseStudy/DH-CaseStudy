@@ -1,5 +1,4 @@
 <h1 align="center">안녕하세요 👋, 이동휘 입니다. </h1>
-<h3 align="center">제목 수정</h3>
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=DH-CaseStudy&label=Profile%20views&color=0e75b6&style=flat" alt="profile views" />
@@ -134,7 +133,7 @@
 
 ---
 
-### 📌 Portfolio [url 수정 필요]
+### 📌 Portfolio
 [Notion Portfolio 바로가기](https://grey-shield-2af.notion.site/1ef77562966580199b6ef942ab7771a4)
 
 
